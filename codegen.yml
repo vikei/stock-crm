@@ -1,0 +1,12 @@
+overwrite: true
+schema: "http://localhost:4000"
+documents: "src/**/*.graphql"
+hooks:
+  afterAllFileWrite:
+    - eslint --quiet --fix
+generates:
+  src/common/lib/generated.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"

@@ -1,6 +1,6 @@
 import {createGlobalStyle} from "styled-components";
 
-const GlobalStyles = createGlobalStyle({
+const globalStyles: Parameters<typeof createGlobalStyle>[0] = {
   html: {
     boxSizing: "border-box",
     fontSize: "62.5%", // 10px/16px = 62.5%, 1rem = 10px
@@ -26,6 +26,6 @@ const GlobalStyles = createGlobalStyle({
   "*, *::before, *::after": {
     boxSizing: "inherit",
   },
-});
+};
 
-export default GlobalStyles;
+export default globalStyles;
