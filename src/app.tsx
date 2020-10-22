@@ -1,16 +1,17 @@
-import React from "react";
-import {BrowserRouter, Route} from "react-router-dom";
-import GlobalStyles from "./common/components/global-styles";
 import {ApolloProvider} from "@apollo/client";
+import React from "react";
+import GlobalStyles from "./common/components/global-styles";
+import {AuthProvider} from "./common/hooks/auth-context";
+import Router from "./common/router";
 import apolloClient from "./common/lib/apollo-client";
 
 function App() {
   return (
     <ApolloProvider client={apolloClient}>
-      <GlobalStyles />
-      <BrowserRouter>
-        <Route path="/">Ready to start...</Route>
-      </BrowserRouter>
+      <AuthProvider>
+        <GlobalStyles />
+        <Router />
+      </AuthProvider>
     </ApolloProvider>
   );
 }
