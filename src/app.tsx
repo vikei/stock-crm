@@ -1,16 +1,12 @@
 import React from "react";
 import {BrowserRouter, Route} from "react-router-dom";
-import GlobalStyles from "./GlobalStyles";
-import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
-
-const client = new ApolloClient({
-  uri: "http://localhost:4000",
-  cache: new InMemoryCache(),
-});
+import GlobalStyles from "./common/components/global-styles";
+import {ApolloProvider} from "@apollo/client";
+import apolloClient from "./common/lib/apollo-client";
 
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
       <GlobalStyles />
       <BrowserRouter>
         <Route path="/">Ready to start...</Route>
