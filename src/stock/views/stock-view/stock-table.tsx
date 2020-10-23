@@ -1,56 +1,19 @@
 import {Button, HTMLTable} from "@blueprintjs/core";
 import React, {useCallback} from "react";
-import {closeDrawer, openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
-import {
-  Product,
-  ProductInput,
-  ProductsQuery,
-  UpdateProductsMutationVariables,
-  useProductLazyQuery,
-  useUpdateProductsMutation,
-} from "../../../main/lib/generated";
-import ProductForm from "../../components/product-from";
+import {openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
+import {ProductsQuery, UpdateProductsMutationVariables} from "../../../main/lib/generated";
+import UpdateProduct from "../../components/update-product";
 
 export default function StockTable({data}: {data: Required<ProductsQuery["products"]>}) {
-  const [getProduct, {data: productData}] = useProductLazyQuery({
-    onCompleted: data => {
-      if (!data.product) {
-        return;
-      }
-      openProductDrawer(data.product);
-    },
-  });
-
-  const {dispatch: drawerDispatch} = useDrawerContext();
-  const [updateProduct] = useUpdateProductsMutation();
-
-  const openProductDrawer = useCallback(
-    (product: Product) => {
-      async function handleSubmit(values: ProductInput) {
-        try {
-          await updateProduct({variables: {input: values, id: product.id}});
-          closeDrawer(drawerDispatch);
-        } catch (e) {
-          console.error(e);
-        }
-      }
-      openDrawer(drawerDispatch, {
-        title: "Добавить продукт",
-        body: <ProductForm onSubmit={handleSubmit} defaultValues={product} />,
-      });
-    },
-    [drawerDispatch, updateProduct],
-  );
-
+  const {dispatch} = useDrawerContext();
   const openProductForm = useCallback(
     (id: UpdateProductsMutationVariables["id"]) => {
-      if (id === productData?.product?.id) {
-        openProductDrawer(productData.product);
-        return;
-      }
-      getProduct({variables: {id}});
+      openDrawer(dispatch, {
+        title: "Обновить продукт",
+        body: <UpdateProduct id={id} />,
+      });
     },
-    [getProduct, openProductDrawer, productData],
+    [dispatch],
   );
 
   return (
