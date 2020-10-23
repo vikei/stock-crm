@@ -9,6 +9,7 @@ import ProductForm from "../../components/product-from";
 const HeaderContainer = styled.header({
   display: "flex",
   justifyContent: "space-between",
+  marginBottom: 30,
 });
 
 interface StockHeaderProps {

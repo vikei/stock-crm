@@ -8,7 +8,7 @@ export default function StockView() {
   return (
     <>
       <StockHeader refetchProducts={refetch} />
-      <StockTable data={data?.products ?? []} />
+      <StockTable data={data?.products ?? []} refetchProducts={refetch} />
     </>
   );
 }
