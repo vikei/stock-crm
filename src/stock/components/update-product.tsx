@@ -1,5 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
-import {useHistory} from "react-router-dom";
+import React, {useCallback, useEffect} from "react";
 import {goBackFromFakeLocation, goToFakeLocation} from "../../library/utils/fake-history";
 import {closeDrawer, useDrawerContext} from "../../main/lib/drawer-context";
 import {
@@ -23,8 +22,6 @@ export default function UpdateProduct({id}: UpdateProductProps) {
     };
   }, [id]);
 
-  const {data} = useProductQuery({variables: {id}});
-
   const [updateProduct] = useUpdateProductsMutation({
     onCompleted: () => {
       closeDrawer(dispatch);
@@ -42,6 +39,7 @@ export default function UpdateProduct({id}: UpdateProductProps) {
     [id, updateProduct],
   );
 
+  const {data} = useProductQuery({variables: {id}});
   if (!data?.product) {
     return null;
   }
