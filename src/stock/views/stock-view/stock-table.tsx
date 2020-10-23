@@ -27,7 +27,7 @@ export default function StockTable({data}: {data: Required<ProductsQuery["produc
         </tr>
       </thead>
       <tbody>
-        {data.map(product => (
+        {data?.map(product => (
           <tr key={product.id}>
             <td>{product.id}</td>
             <td>{product.name}</td>

@@ -4,11 +4,11 @@ import StockHeader from "./stock-header";
 import StockTable from "./stock-table";
 
 export default function StockView() {
-  const {data} = useProductsQuery();
+  const {data, refetch} = useProductsQuery();
 
   return (
     <>
-      <StockHeader />
+      <StockHeader refetchProducts={refetch} />
       <StockTable data={data?.products ?? []} />
     </>
   );
