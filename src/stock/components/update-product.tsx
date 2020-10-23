@@ -1,4 +1,6 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect, useState} from "react";
+import {useHistory} from "react-router-dom";
+import {goBackFromFakeLocation, goToFakeLocation} from "../../library/utils/fake-history";
 import {closeDrawer, useDrawerContext} from "../../main/lib/drawer-context";
 import {
   ProductInput,
@@ -13,6 +15,14 @@ interface UpdateProductProps {
 }
 
 export default function UpdateProduct({id}: UpdateProductProps) {
+  useEffect(() => {
+    goToFakeLocation(`/stock/product/${id}/update`);
+
+    return () => {
+      goBackFromFakeLocation();
+    };
+  }, [id]);
+
   const {data} = useProductQuery({variables: {id}});
 
   const [updateProduct] = useUpdateProductsMutation({

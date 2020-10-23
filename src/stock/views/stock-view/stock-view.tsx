@@ -5,7 +5,6 @@ import StockTable from "./stock-table";
 
 export default function StockView() {
   const {data, refetch} = useProductsQuery();
-
   return (
     <>
       <StockHeader refetchProducts={refetch} />
