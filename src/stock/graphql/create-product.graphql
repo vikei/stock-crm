@@ -1,0 +1,5 @@
+mutation CreateProducts($input: ProductInput!) {
+    createProduct(input: $input) {
+        ...ProductFields
+    }
+}

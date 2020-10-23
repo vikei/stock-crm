@@ -5,7 +5,7 @@ hooks:
   afterAllFileWrite:
     - eslint --quiet --fix
 generates:
-  src/common/lib/generated.ts:
+  src/main/lib/generated.ts:
     plugins:
       - "typescript"
       - "typescript-operations"

@@ -2,8 +2,8 @@ import {Button, Card, FormGroup, InputGroup, Text} from "@blueprintjs/core";
 import React, {useCallback} from "react";
 import {useForm} from "react-hook-form";
 import styled from "styled-components";
-import {setUser, useAuthContext} from "../hooks/auth-context";
-import {useLoginMutation, UserCredentials} from "../lib/generated";
+import {useLoginMutation, UserCredentials} from "../../main/lib/generated";
+import {setUser, useAuthContext} from "../lib/auth-context";
 
 const LoginContainer = styled.div({
   display: "flex",

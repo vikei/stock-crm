@@ -1,17 +1,20 @@
 import {ApolloProvider} from "@apollo/client";
 import React from "react";
-import GlobalStyles from "./common/components/global-styles";
-import {AuthProvider} from "./common/hooks/auth-context";
-import Router from "./common/router";
-import apolloClient from "./common/lib/apollo-client";
+import {AuthProvider} from "./auth/lib/auth-context";
+import GlobalStyles from "./main/components/global-styles";
+import Router from "./main/components/router";
+import apolloClient from "./main/lib/apollo-client";
+import {DrawerProvider} from "./main/lib/drawer-context";
 
 function App() {
   return (
     <ApolloProvider client={apolloClient}>
-      <AuthProvider>
-        <GlobalStyles />
-        <Router />
-      </AuthProvider>
+      <DrawerProvider>
+        <AuthProvider>
+          <GlobalStyles />
+          <Router />
+        </AuthProvider>
+      </DrawerProvider>
     </ApolloProvider>
   );
 }

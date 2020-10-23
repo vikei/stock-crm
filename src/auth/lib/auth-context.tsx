@@ -1,5 +1,5 @@
 import React, {createContext, Dispatch, ReactNode, useContext, useReducer} from "react";
-import {User} from "../lib/generated";
+import {User} from "../../main/lib/generated";
 
 interface AuthState {
   user: User | null;
