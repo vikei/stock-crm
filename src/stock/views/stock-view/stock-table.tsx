@@ -17,6 +17,7 @@ export default function StockTable({data, refetchProducts}: StockTableProps) {
           <th>ID</th>
           <th>Название</th>
           <th>Цена</th>
+          <th>Склад</th>
           <th />
         </tr>
       </thead>
@@ -26,6 +27,7 @@ export default function StockTable({data, refetchProducts}: StockTableProps) {
             <td>{product.id}</td>
             <td>{product.name}</td>
             <td>{product.price}</td>
+            <td>{product.stockCount}</td>
             <td>
               <StockTableActions
                 refetchProducts={refetchProducts}

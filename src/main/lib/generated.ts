@@ -11,12 +11,21 @@ export type Scalars = {
   Float: number;
 };
 
+export type Stock = {
+  __typename?: "Stock";
+  id: Scalars["ID"];
+  productId: Scalars["Int"];
+  count: Scalars["Int"];
+  product: Product;
+};
+
 export type Product = {
   __typename?: "Product";
   id: Scalars["ID"];
   name: Scalars["String"];
   description: Scalars["String"];
   price: Scalars["Float"];
+  stockCount: Scalars["Int"];
 };
 
 export type User = {
@@ -29,6 +38,7 @@ export type ProductInput = {
   name: Scalars["String"];
   description: Scalars["String"];
   price: Scalars["Float"];
+  stockCount: Scalars["Int"];
 };
 
 export type UserCredentials = {
@@ -114,7 +124,7 @@ export type DeleteProductMutation = {__typename?: "Mutation"} & Pick<Mutation, "
 
 export type ProductFieldsFragment = {__typename?: "Product"} & Pick<
   Product,
-  "id" | "name" | "description" | "price"
+  "id" | "name" | "description" | "price" | "stockCount"
 >;
 
 export type ProductQueryVariables = Exact<{
@@ -146,6 +156,7 @@ export const ProductFieldsFragmentDoc = gql`
     name
     description
     price
+    stockCount
   }
 `;
 export const LoginDocument = gql`
