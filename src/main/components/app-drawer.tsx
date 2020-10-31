@@ -1,11 +1,6 @@
-import {Drawer} from "@blueprintjs/core";
+import {Drawer} from "antd";
 import React from "react";
-import styled from "styled-components";
 import {useDrawerContext} from "../lib/drawer-context";
-
-const BodyContainer = styled.div({
-  padding: 20,
-});
 
 export default function AppDrawer() {
   const {
@@ -13,9 +8,5 @@ export default function AppDrawer() {
     getProps,
   } = useDrawerContext();
 
-  return (
-    <Drawer {...getProps()}>
-      <BodyContainer>{body}</BodyContainer>
-    </Drawer>
-  );
+  return <Drawer {...getProps()}>{body}</Drawer>;
 }

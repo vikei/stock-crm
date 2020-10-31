@@ -1,4 +1,4 @@
-import {Button, Card, FormGroup, InputGroup, Text} from "@blueprintjs/core";
+import {Button, Card, Form, Input} from "antd";
 import React, {useCallback} from "react";
 import {useForm} from "react-hook-form";
 import styled from "styled-components";
@@ -35,17 +35,16 @@ export default function RegistrationView() {
 
   return (
     <RegistrationContainer>
-      <Card>
-        <Text tagName="h1">Registration</Text>
-        <form onSubmit={handleSubmit(submit)}>
-          <FormGroup label="Email">
-            <InputGroup name="email" inputRef={registerField} />
-          </FormGroup>
-          <FormGroup label="Password">
-            <InputGroup name="password" type="password" inputRef={registerField} />
-          </FormGroup>
-          <Button type="submit">Register</Button>
-        </form>
+      <Card title="Registration">
+        <Form onFinish={submit}>
+          <Form.Item label="Email" name="email">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Password" name="password">
+            <Input type="password" />
+          </Form.Item>
+          <Button htmlType="submit">Login</Button>
+        </Form>
       </Card>
     </RegistrationContainer>
   );

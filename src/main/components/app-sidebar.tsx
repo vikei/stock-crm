@@ -1,47 +1,69 @@
+import {CodeSandboxOutlined, DatabaseOutlined} from "@ant-design/icons/lib";
+import {Menu} from "antd";
 import React from "react";
-import {NavLink} from "react-router-dom";
+import {Link, matchPath, useLocation} from "react-router-dom";
 import styled from "styled-components";
 
-const AppSidebarContainer = styled.div({
-  textTransform: "uppercase",
-  fontWeight: 500,
+const AppSidebarNav = styled(Menu)({
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
 
-  ul: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
+  width: "100%",
+
+  backgroundColor: "initial",
+  borderRight: "none",
+});
+
+const AppSidebarItem = styled(Menu.Item)({
+  borderRadius: 5,
+  color: "#f2f2f2",
+
+  width: "70%",
+
+  ".ant-layout-sider-collapsed &": {
+    padding: "0 16px",
+    width: "initial",
   },
 
-  li: {
-    listStyle: "none",
+  "a, a:hover, svg": {
+    color: "#f2f2f2",
+  },
 
-    "&:not(last-of-type)": {
-      marginBottom: 15,
-    },
+  "&.ant-menu-item-active": {
+    backgroundColor: "rgba(26, 43, 129, .5)",
+  },
 
-    "& .active": {
-      color: "#40464C",
-    },
+  "&.ant-menu-item-selected": {
+    backgroundColor: "#1A2B81!important",
   },
 });
 
+const menuKeys: {[key: string]: string} = {
+  stock: "/stock",
+  orders: "/orders",
+};
+
 export default function AppSidebar() {
+  const location = useLocation();
+
+  const getActiveMenuKey = () =>
+    Object.keys(menuKeys).filter(menuKey =>
+      Boolean(
+        matchPath(location.pathname, {
+          path: menuKeys[menuKey],
+        }),
+      ),
+    );
+
   return (
-    <AppSidebarContainer>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to="/stock" activeClassName="active">
-              Склад
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/orders" activeClassName="active">
-              Заказы
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-    </AppSidebarContainer>
+    <AppSidebarNav defaultSelectedKeys={getActiveMenuKey()}>
+      <AppSidebarItem key="stock" icon={<DatabaseOutlined />}>
+        <Link to="/stock">Склад</Link>
+      </AppSidebarItem>
+      <AppSidebarItem key="orders" icon={<CodeSandboxOutlined />}>
+        <Link to="/orders">Заказы</Link>
+      </AppSidebarItem>
+    </AppSidebarNav>
   );
 }

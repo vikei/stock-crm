@@ -1,6 +1,5 @@
-import {Button, Card, FormGroup, InputGroup, Text} from "@blueprintjs/core";
+import {Button, Card, Form, Input} from "antd";
 import React, {useCallback} from "react";
-import {useForm} from "react-hook-form";
 import styled from "styled-components";
 import {useLoginMutation, UserCredentials} from "../../main/lib/generated";
 import {setUser, useAuthContext} from "../lib/auth-context";
@@ -18,7 +17,6 @@ const LoginContainer = styled.div({
 
 export default function LoginView() {
   const [login] = useLoginMutation();
-  const {register, handleSubmit} = useForm<UserCredentials>();
   const [, dispatch] = useAuthContext();
 
   const submit = useCallback(
@@ -35,17 +33,16 @@ export default function LoginView() {
 
   return (
     <LoginContainer>
-      <Card>
-        <Text tagName="h1">Login</Text>
-        <form onSubmit={handleSubmit(submit)}>
-          <FormGroup label="Email">
-            <InputGroup name="email" inputRef={register} />
-          </FormGroup>
-          <FormGroup label="Password">
-            <InputGroup name="password" type="password" inputRef={register} />
-          </FormGroup>
-          <Button type="submit">Login</Button>
-        </form>
+      <Card title="Login">
+        <Form onFinish={submit}>
+          <Form.Item label="Email" name="email">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Password" name="password">
+            <Input type="password" />
+          </Form.Item>
+          <Button htmlType="submit">Login</Button>
+        </Form>
       </Card>
     </LoginContainer>
   );

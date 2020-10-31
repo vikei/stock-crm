@@ -1,5 +1,6 @@
+import {DeleteOutlined, EditOutlined, EyeOutlined} from "@ant-design/icons";
 import {ApolloQueryResult} from "@apollo/client";
-import {Button} from "@blueprintjs/core";
+import {Button, Space} from "antd";
 import React, {useCallback} from "react";
 import {openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {
@@ -23,6 +24,7 @@ export default function StockTableActions({id, name, refetchProducts}: StockTabl
     (id: UpdateProductsMutationVariables["id"]) => {
       openDrawer(dispatch, {
         title: "Обновить продукт",
+        width: "50vw",
         body: <UpdateProduct id={id} />,
       });
     },
@@ -32,6 +34,7 @@ export default function StockTableActions({id, name, refetchProducts}: StockTabl
     ({id, name}: {id: UpdateProductsMutationVariables["id"]; name: string}) => {
       openDrawer(dispatch, {
         title: name,
+        width: "50vw",
         body: <ProductPreview id={id} />,
       });
     },
@@ -52,10 +55,10 @@ export default function StockTableActions({id, name, refetchProducts}: StockTabl
   );
 
   return (
-    <>
-      <Button icon="edit" onClick={() => openProductForm(id)} />
-      <Button icon="eye-open" onClick={() => openProductPreview({id, name})} />
-      <Button icon="delete" onClick={() => removeProduct(id)} />
-    </>
+    <Space size={5}>
+      <Button icon={<EditOutlined />} onClick={() => openProductForm(id)} />
+      <Button icon={<EyeOutlined />} onClick={() => openProductPreview({id, name})} />
+      <Button icon={<DeleteOutlined />} onClick={() => removeProduct(id)} />
+    </Space>
   );
 }

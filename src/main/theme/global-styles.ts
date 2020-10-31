@@ -1,3 +1,4 @@
+import "antd/dist/antd.css";
 import {createGlobalStyle} from "styled-components";
 
 const globalStyles: Parameters<typeof createGlobalStyle>[0] = {
@@ -25,6 +26,10 @@ const globalStyles: Parameters<typeof createGlobalStyle>[0] = {
 
   "*, *::before, *::after": {
     boxSizing: "inherit",
+  },
+
+  "#root": {
+    height: "100%",
   },
 };
 

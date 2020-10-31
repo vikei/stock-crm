@@ -1,5 +1,6 @@
+import {PlusSquareOutlined} from "@ant-design/icons";
 import {ApolloQueryResult} from "@apollo/client";
-import {Button, Text} from "@blueprintjs/core";
+import {Button} from "antd";
 import React, {useCallback} from "react";
 import styled from "styled-components";
 import {closeDrawer, openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
@@ -37,16 +38,14 @@ export default function StockHeader({refetchProducts}: StockHeaderProps) {
     openDrawer(drawerDispatch, {
       title: "Добавить продукт",
       body: <ProductForm onSubmit={onSubmit} />,
+      width: "50vw",
     });
   }, [drawerDispatch, onSubmit]);
 
   return (
     <HeaderContainer>
       <div>
-        <Text tagName="h2">Склад</Text>
-      </div>
-      <div>
-        <Button icon="add" onClick={openProductForm}>
+        <Button icon={<PlusSquareOutlined />} onClick={openProductForm}>
           Добавить Продукт
         </Button>
       </div>

@@ -4,6 +4,7 @@ interface DrawerState {
   open: boolean;
   body?: ReactNode | null;
   title?: React.ReactNode;
+  width?: string | number;
 }
 
 interface OpenDrawerAction {
@@ -56,8 +57,9 @@ export function useDrawerContext() {
     state: ctx[0],
     dispatch: ctx[1],
     getProps: () => ({
-      isOpen: ctx[0].open,
+      visible: ctx[0].open,
       title: ctx[0].title,
+      width: ctx[0].width,
       onClose: () => {
         closeDrawer(ctx[1]);
       },

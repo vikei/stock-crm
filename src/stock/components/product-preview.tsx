@@ -1,4 +1,4 @@
-import {Text} from "@blueprintjs/core";
+import {Typography} from "antd";
 import React, {useEffect} from "react";
 import {goBackFromFakeLocation, goToFakeLocation} from "../../library/utils/fake-history";
 import {UpdateProductsMutationVariables, useProductQuery} from "../../main/lib/generated";
@@ -23,7 +23,7 @@ export default function ProductPreview({id}: ProductPreviewProps) {
 
   return (
     <>
-      <Text>{data.product.description}</Text>
+      <Typography>{data.product.description}</Typography>
     </>
   );
 }
