@@ -1,20 +1,9 @@
-import {ApolloQueryResult} from "@apollo/client";
 import {Table} from "antd";
 import {ColumnsType} from "antd/es/table";
-import React, {createContext, useContext} from "react";
+import React from "react";
 import {Product, ProductsQuery} from "../../../main/lib/generated";
 import StockTableActions from "./stock-table-actions";
-
-type Refetch = () => Promise<ApolloQueryResult<ProductsQuery>>;
-
-const TableContext = createContext<{refetch: Refetch} | undefined>(undefined);
-function useTableContext() {
-  const ctx = useContext(TableContext);
-  if (!ctx) {
-    throw new Error("You must wrap in TableContext.Provider");
-  }
-  return ctx;
-}
+import {useRefetchProductsContext} from "./stock-view.lib";
 
 const columns: ColumnsType<Product> = [
   {
@@ -36,7 +25,7 @@ const columns: ColumnsType<Product> = [
     title: "Действия",
     key: "actions",
     render: function TableActions(_, {id, name}) {
-      const {refetch} = useTableContext();
+      const {refetch} = useRefetchProductsContext();
       return <StockTableActions refetchProducts={refetch} id={id} name={name} />;
     },
   },
@@ -44,13 +33,8 @@ const columns: ColumnsType<Product> = [
 
 interface StockTableProps {
   data: Required<ProductsQuery["products"]>;
-  refetchProducts: Refetch;
 }
 
-export default function StockTable({data, refetchProducts}: StockTableProps) {
-  return (
-    <TableContext.Provider value={{refetch: refetchProducts}}>
-      <Table columns={columns} dataSource={data} key="id" />
-    </TableContext.Provider>
-  );
+export default function StockTable({data}: StockTableProps) {
+  return <Table columns={columns} dataSource={data} key="id" />;
 }

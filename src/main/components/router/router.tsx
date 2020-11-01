@@ -4,7 +4,8 @@ import RequireAuth from "../../../auth/lib/require-auth";
 import RequireNotAuth from "../../../auth/lib/require-not-auth";
 import LoginView from "../../../auth/views/login-view";
 import RegistrationView from "../../../auth/views/register-view";
-import StockView from "../../../stock/views/stock-view/stock-view";
+import OrdersView from "../../../orders/views/orders-view";
+import StockView from "../../../stock/views/stock-view";
 import AppLayout from "../app-layout/app-layout";
 
 export default function Router() {
@@ -26,6 +27,9 @@ export default function Router() {
             <AppLayout>
               <Route path="/stock">
                 <StockView />
+              </Route>
+              <Route path="/orders">
+                <OrdersView />
               </Route>
             </AppLayout>
           </RequireAuth>

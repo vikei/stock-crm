@@ -34,3 +34,9 @@ export const AppContentWrapper = styled(Content)({
 export const AppFooter = styled(Footer)({
   backgroundColor: "#FFF",
 });
+
+export const AppContentHeader = styled.header({
+  display: "flex",
+  justifyContent: "space-between",
+  marginBottom: 30,
+});

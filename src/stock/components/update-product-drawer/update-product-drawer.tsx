@@ -3,17 +3,17 @@ import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/f
 import {closeDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {
   ProductInput,
-  UpdateProductsMutationVariables,
+  ProductQueryVariables,
   useProductQuery,
   useUpdateProductsMutation,
 } from "../../../main/lib/generated";
 import ProductForm from "../product-form";
 
-interface UpdateProductProps {
-  id: UpdateProductsMutationVariables["id"];
+interface UpdateProductDrawerProps {
+  id: ProductQueryVariables["id"];
 }
 
-export default function UpdateProduct({id}: UpdateProductProps) {
+export default function UpdateProductDrawer({id}: UpdateProductDrawerProps) {
   useEffect(() => {
     goToFakeLocation(`/stock/product/${id}/update`);
 

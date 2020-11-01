@@ -5,32 +5,33 @@ import React, {useCallback} from "react";
 import {openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {
   Product,
+  ProductQueryVariables,
   ProductsQuery,
   UpdateProductsMutationVariables,
   useDeleteProductMutation,
 } from "../../../main/lib/generated";
 import ProductPreview from "../../components/product-preview";
-import UpdateProduct from "../../components/update-product";
+import UpdateProductDrawer from "../../components/update-product-drawer";
 
 interface StockTableActionsProps {
   refetchProducts: () => Promise<ApolloQueryResult<ProductsQuery>>;
-  id: UpdateProductsMutationVariables["id"];
+  id: ProductQueryVariables["id"];
   name: Product["name"];
 }
 
 export default function StockTableActions({id, name, refetchProducts}: StockTableActionsProps) {
   const {dispatch} = useDrawerContext();
-  const openProductForm = useCallback(
+  const openForm = useCallback(
     (id: UpdateProductsMutationVariables["id"]) => {
       openDrawer(dispatch, {
         title: "Обновить продукт",
         width: "50vw",
-        body: <UpdateProduct id={id} />,
+        body: <UpdateProductDrawer id={id} />,
       });
     },
     [dispatch],
   );
-  const openProductPreview = useCallback(
+  const openPreview = useCallback(
     ({id, name}: {id: UpdateProductsMutationVariables["id"]; name: string}) => {
       openDrawer(dispatch, {
         title: name,
@@ -42,7 +43,7 @@ export default function StockTableActions({id, name, refetchProducts}: StockTabl
   );
 
   const [deleteProduct] = useDeleteProductMutation();
-  const removeProduct = useCallback(
+  const remove = useCallback(
     async (id: string) => {
       try {
         await deleteProduct({variables: {id}});
@@ -56,9 +57,9 @@ export default function StockTableActions({id, name, refetchProducts}: StockTabl
 
   return (
     <Space size={5}>
-      <Button icon={<EditOutlined />} onClick={() => openProductForm(id)} />
-      <Button icon={<EyeOutlined />} onClick={() => openProductPreview({id, name})} />
-      <Button icon={<DeleteOutlined />} onClick={() => removeProduct(id)} />
+      <Button icon={<EditOutlined />} onClick={() => openForm(id)} />
+      <Button icon={<EyeOutlined />} onClick={() => openPreview({id, name})} />
+      <Button icon={<DeleteOutlined />} onClick={() => remove(id)} />
     </Space>
   );
 }

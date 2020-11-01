@@ -1,0 +1,10 @@
+fragment OrderFields on Order {
+    id
+    inventory {
+        productId
+        count
+    }
+    products {
+        ...ProductFields
+    }
+}
