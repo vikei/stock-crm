@@ -1,13 +1,13 @@
 import React, {useCallback, useEffect} from "react";
-import {goBackFromFakeLocation, goToFakeLocation} from "../../library/utils/fake-history";
-import {closeDrawer, useDrawerContext} from "../../main/lib/drawer-context";
+import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/fake-history";
+import {closeDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {
   ProductInput,
   UpdateProductsMutationVariables,
   useProductQuery,
   useUpdateProductsMutation,
-} from "../../main/lib/generated";
-import ProductForm from "./product-from";
+} from "../../../main/lib/generated";
+import ProductForm from "../product-form";
 
 interface UpdateProductProps {
   id: UpdateProductsMutationVariables["id"];

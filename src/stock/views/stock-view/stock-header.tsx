@@ -5,7 +5,7 @@ import React, {useCallback} from "react";
 import styled from "styled-components";
 import {closeDrawer, openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {ProductsQuery, useCreateProductsMutation} from "../../../main/lib/generated";
-import ProductForm from "../../components/product-from";
+import ProductForm from "../../components/product-form";
 
 const HeaderContainer = styled.header({
   display: "flex",

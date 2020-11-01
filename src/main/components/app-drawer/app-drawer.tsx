@@ -1,6 +1,6 @@
 import {Drawer} from "antd";
 import React from "react";
-import {useDrawerContext} from "../lib/drawer-context";
+import {useDrawerContext} from "../../lib/drawer-context";
 
 export default function AppDrawer() {
   const {

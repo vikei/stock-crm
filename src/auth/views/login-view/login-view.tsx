@@ -1,19 +1,8 @@
 import {Button, Card, Form, Input} from "antd";
 import React, {useCallback} from "react";
-import styled from "styled-components";
-import {useLoginMutation, UserCredentials} from "../../main/lib/generated";
-import {setUser, useAuthContext} from "../lib/auth-context";
-
-const LoginContainer = styled.div({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  paddingTop: 100,
-
-  ".bp3-card": {
-    width: 600,
-  },
-});
+import {useLoginMutation, UserCredentials} from "../../../main/lib/generated";
+import {setUser, useAuthContext} from "../../lib/auth-context";
+import {LoginContainer} from "./login-view.styled";
 
 export default function LoginView() {
   const [login] = useLoginMutation();

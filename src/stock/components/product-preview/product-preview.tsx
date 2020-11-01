@@ -1,7 +1,7 @@
 import {Typography} from "antd";
 import React, {useEffect} from "react";
-import {goBackFromFakeLocation, goToFakeLocation} from "../../library/utils/fake-history";
-import {UpdateProductsMutationVariables, useProductQuery} from "../../main/lib/generated";
+import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/fake-history";
+import {UpdateProductsMutationVariables, useProductQuery} from "../../../main/lib/generated";
 
 interface ProductPreviewProps {
   id: UpdateProductsMutationVariables["id"];

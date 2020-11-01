@@ -1,6 +1,6 @@
 import {Button, Form, Input, InputNumber} from "antd";
 import React, {useCallback} from "react";
-import {Product, ProductInput} from "../../main/lib/generated";
+import {Product, ProductInput} from "../../../main/lib/generated";
 
 interface ProductFormProps {
   onSubmit: (values: ProductInput) => void;
