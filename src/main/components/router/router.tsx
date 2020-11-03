@@ -4,7 +4,10 @@ import RequireAuth from "../../../auth/lib/require-auth";
 import RequireNotAuth from "../../../auth/lib/require-not-auth";
 import LoginView from "../../../auth/views/login-view";
 import RegistrationView from "../../../auth/views/register-view";
+import CreateOrderView from "../../../orders/views/create-order-view";
+import OrderView from "../../../orders/views/order-view/order-view";
 import OrdersView from "../../../orders/views/orders-view";
+import UpdateOrderView from "../../../orders/views/update-order-view/update-order-view";
 import CreateProductView from "../../../stock/views/create-product-view";
 import ProductView from "../../../stock/views/product-view";
 import StockView from "../../../stock/views/stock-view";
@@ -42,8 +45,17 @@ export default function Router() {
                 <Route path="/stock/product/create">
                   <CreateProductView />
                 </Route>
-                <Route path="/orders">
+                <Route path="/orders" exact>
                   <OrdersView />
+                </Route>
+                <Route path="/orders/create">
+                  <CreateOrderView />
+                </Route>
+                <Route path="/orders/:id" exact>
+                  <OrderView />
+                </Route>
+                <Route path="/orders/:id/update" exact>
+                  <UpdateOrderView />
                 </Route>
               </AppLayout>
             </RequireAuth>

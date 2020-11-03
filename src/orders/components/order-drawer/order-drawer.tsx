@@ -3,11 +3,11 @@ import React, {useEffect} from "react";
 import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/fake-history";
 import {OrderQueryVariables, useOrderQuery} from "../../../main/lib/generated";
 
-interface OrderPreviewProps {
+interface OrderDrawerProps {
   id: OrderQueryVariables["id"];
 }
 
-export default function OrderPreview({id}: OrderPreviewProps) {
+export default function OrderDrawer({id}: OrderDrawerProps) {
   useEffect(() => {
     goToFakeLocation(`/orders/${id}`);
 
@@ -21,13 +21,5 @@ export default function OrderPreview({id}: OrderPreviewProps) {
     return null;
   }
 
-  return (
-    <>
-      <Typography>
-        {data?.order?.products.map(product => (
-          <Typography key={product.id}>{product.name}</Typography>
-        ))}
-      </Typography>
-    </>
-  );
+  return <Typography>{data.order.id}</Typography>;
 }

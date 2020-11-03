@@ -10,6 +10,7 @@ interface CreateProductContainerProps {
 export default function CreateProductContainer({onSuccess}: CreateProductContainerProps) {
   const history = useHistory();
   const [createProduct] = useCreateProductsMutation();
+
   const onSubmit = useCallback(
     async values => {
       try {

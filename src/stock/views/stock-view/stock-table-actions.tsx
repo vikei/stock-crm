@@ -1,26 +1,24 @@
 import {DeleteOutlined, EditOutlined, EyeOutlined} from "@ant-design/icons";
-import {ApolloQueryResult} from "@apollo/client";
 import {Button, Space} from "antd";
 import React, {useCallback} from "react";
 import {openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {
   Product,
   ProductQueryVariables,
-  ProductsQuery,
   UpdateProductsMutationVariables,
   useDeleteProductMutation,
 } from "../../../main/lib/generated";
 import {useMessages} from "../../../main/lib/use-messages";
 import ProductDrawer from "../../components/product-drawer";
 import UpdateProductDrawer from "../../components/update-product-drawer";
+import {useRefetchProductsContext} from "./stock-view.lib";
 
 interface StockTableActionsProps {
-  refetchProducts: () => Promise<ApolloQueryResult<ProductsQuery>>;
   id: ProductQueryVariables["id"];
   name: Product["name"];
 }
 
-export default function StockTableActions({id, name, refetchProducts}: StockTableActionsProps) {
+export default function StockTableActions({id, name}: StockTableActionsProps) {
   const {dispatch} = useDrawerContext();
 
   const openPreview = useCallback(
@@ -45,6 +43,7 @@ export default function StockTableActions({id, name, refetchProducts}: StockTabl
     [dispatch],
   );
 
+  const {refetch} = useRefetchProductsContext();
   const [deleteProduct] = useDeleteProductMutation();
   const message = useMessages();
   const remove = useCallback(
@@ -52,12 +51,12 @@ export default function StockTableActions({id, name, refetchProducts}: StockTabl
       try {
         await deleteProduct({variables: {id}});
         message.success("Продукт успешно удален!");
-        await refetchProducts();
+        await refetch();
       } catch (e) {
         console.error(e);
       }
     },
-    [deleteProduct, message, refetchProducts],
+    [deleteProduct, message, refetch],
   );
 
   return (

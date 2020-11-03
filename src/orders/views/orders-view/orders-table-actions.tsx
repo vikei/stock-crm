@@ -7,7 +7,8 @@ import {
   UpdateOrderMutationVariables,
   useDeleteOrderMutation,
 } from "../../../main/lib/generated";
-import OrderPreview from "../../components/order-preview";
+import {useMessages} from "../../../main/lib/use-messages";
+import OrderDrawer from "../../components/order-drawer";
 import UpdateOrderDrawer from "../../components/update-order-drawer";
 import {useRefetchOrdersContext} from "./orders-view.lib";
 
@@ -17,13 +18,12 @@ interface OrdersTableActionsProps {
 
 export default function OrdersTableActions({id}: OrdersTableActionsProps) {
   const {dispatch} = useDrawerContext();
-  const {refetch} = useRefetchOrdersContext();
 
   const openForm = useCallback(
     (id: UpdateOrderMutationVariables["id"]) => {
       openDrawer(dispatch, {
         title: `Обновить закза #${id}`,
-        width: "50vw",
+        width: "80vw",
         body: <UpdateOrderDrawer id={id} />,
       });
     },
@@ -34,23 +34,27 @@ export default function OrdersTableActions({id}: OrdersTableActionsProps) {
     ({id}: {id: string}) => {
       openDrawer(dispatch, {
         title: `#${id}`,
-        width: "50vw",
-        body: <OrderPreview id={id} />,
+        width: "80vw",
+        body: <OrderDrawer id={id} />,
       });
     },
     [dispatch],
   );
+
+  const {refetch} = useRefetchOrdersContext();
+  const message = useMessages();
   const [deleteOrder] = useDeleteOrderMutation();
   const remove = useCallback(
     async (id: string) => {
       try {
         await deleteOrder({variables: {id}});
+        message.success("Заказ успешно удален!");
         await refetch();
       } catch (e) {
         console.error(e);
       }
     },
-    [deleteOrder, refetch],
+    [deleteOrder, message, refetch],
   );
 
   return (

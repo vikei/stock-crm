@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 
 interface SaveProductMessageProps {
   id: string;
-  new?: boolean;
 }
 
 export default function SaveProductMessage({id}: SaveProductMessageProps) {

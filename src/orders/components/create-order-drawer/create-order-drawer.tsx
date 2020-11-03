@@ -3,27 +3,31 @@ import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/f
 import {closeDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {OrderQueryVariables} from "../../../main/lib/generated";
 import useOrderMessage from "../../lib/show-order-message";
-import UpdateOrderContainer from "../update-order-container";
+import CreateOrderContainer from "../create-order-container";
 
-interface UpdateOrderDrawerProps {
-  id: OrderQueryVariables["id"];
+interface CreateOrderDrawerProps {
+  onSuccess?: () => void;
 }
 
-export default function UpdateOrderDrawer({id}: UpdateOrderDrawerProps) {
+export default function CreateOrderDrawer({onSuccess}: CreateOrderDrawerProps) {
   useEffect(() => {
-    goToFakeLocation(`/orders/${id}/update`);
+    goToFakeLocation("/orders/create");
 
     return () => {
       goBackFromFakeLocation();
     };
-  }, [id]);
+  });
 
   const {dispatch: drawerDispatch} = useDrawerContext();
   const message = useOrderMessage();
-  const handleSuccess = useCallback(async () => {
-    closeDrawer(drawerDispatch);
-    message(id);
-  }, [drawerDispatch, id, message]);
+  const handleSuccess = useCallback(
+    async (id: OrderQueryVariables["id"]) => {
+      closeDrawer(drawerDispatch);
+      message(id);
+      onSuccess?.();
+    },
+    [drawerDispatch, message, onSuccess],
+  );
 
-  return <UpdateOrderContainer id={id} onSuccess={handleSuccess} />;
+  return <CreateOrderContainer onSuccess={handleSuccess} />;
 }

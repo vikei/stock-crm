@@ -5,7 +5,11 @@ import {ProductQueryVariables} from "../../../main/lib/generated";
 import useProductMessage from "../../lib/show-product-message";
 import CreateProductContainer from "../create-product-container";
 
-export default function CreateProductDrawer() {
+interface CreateProductDrawerProps {
+  onSuccess?: () => void;
+}
+
+export default function CreateProductDrawer({onSuccess}: CreateProductDrawerProps) {
   useEffect(() => {
     goToFakeLocation("/stock/product/create");
 
@@ -20,8 +24,9 @@ export default function CreateProductDrawer() {
     async (id: ProductQueryVariables["id"]) => {
       closeDrawer(drawerDispatch);
       message(id);
+      onSuccess?.();
     },
-    [drawerDispatch, message],
+    [drawerDispatch, message, onSuccess],
   );
 
   return <CreateProductContainer onSuccess={handleSuccess} />;

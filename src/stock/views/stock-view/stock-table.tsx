@@ -3,7 +3,6 @@ import {ColumnsType} from "antd/es/table";
 import React from "react";
 import {Product, ProductsQuery} from "../../../main/lib/generated";
 import StockTableActions from "./stock-table-actions";
-import {useRefetchProductsContext} from "./stock-view.lib";
 
 const columns: ColumnsType<Product> = [
   {
@@ -25,8 +24,7 @@ const columns: ColumnsType<Product> = [
     title: "Действия",
     key: "actions",
     render: function TableActions(_, {id, name}) {
-      const {refetch} = useRefetchProductsContext();
-      return <StockTableActions refetchProducts={refetch} id={id} name={name} />;
+      return <StockTableActions id={id} name={name} />;
     },
   },
 ];
