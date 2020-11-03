@@ -21,22 +21,24 @@ interface StockTableActionsProps {
 
 export default function StockTableActions({id, name, refetchProducts}: StockTableActionsProps) {
   const {dispatch} = useDrawerContext();
-  const openForm = useCallback(
-    (id: UpdateProductsMutationVariables["id"]) => {
+
+  const openPreview = useCallback(
+    ({id, name}: {id: ProductQueryVariables["id"]; name: string}) => {
       openDrawer(dispatch, {
-        title: "Обновить продукт",
-        width: "50vw",
-        body: <UpdateProductDrawer id={id} />,
+        title: name,
+        width: "80vw",
+        body: <ProductDrawer id={id} />,
       });
     },
     [dispatch],
   );
-  const openPreview = useCallback(
+
+  const openForm = useCallback(
     ({id, name}: {id: UpdateProductsMutationVariables["id"]; name: string}) => {
       openDrawer(dispatch, {
-        title: name,
-        width: "50vw",
-        body: <ProductDrawer id={id} />,
+        title: `Обновить #${name}`,
+        width: "80vw",
+        body: <UpdateProductDrawer id={id} />,
       });
     },
     [dispatch],
@@ -57,7 +59,7 @@ export default function StockTableActions({id, name, refetchProducts}: StockTabl
 
   return (
     <Space size={5}>
-      <Button icon={<EditOutlined />} onClick={() => openForm(id)} />
+      <Button icon={<EditOutlined />} onClick={() => openForm({id, name})} />
       <Button icon={<EyeOutlined />} onClick={() => openPreview({id, name})} />
       <Button icon={<DeleteOutlined />} onClick={() => remove(id)} />
     </Space>

@@ -29,7 +29,7 @@ export default function OrdersHeader() {
     openDrawer(drawerDispatch, {
       title: "Добавить Заказ",
       body: <OrderForm onSubmit={onSubmit} />,
-      width: "50vw",
+      width: "80vw",
     });
   }, [drawerDispatch, onSubmit]);
 

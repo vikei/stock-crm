@@ -1,26 +1,21 @@
 import React, {useCallback, useEffect} from "react";
 import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/fake-history";
 import {closeDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
-import {ProductQueryVariables} from "../../../main/lib/generated";
-import UpdateProductContainer from "../update-product-container";
+import CreateProductContainer from "../create-product-container";
 
-interface UpdateProductDrawerProps {
-  id: ProductQueryVariables["id"];
-}
-
-export default function UpdateProductDrawer({id}: UpdateProductDrawerProps) {
+export default function CreateProductDrawer() {
   useEffect(() => {
-    goToFakeLocation(`/stock/product/${id}/update`);
+    goToFakeLocation("/stock/product/create");
 
     return () => {
       goBackFromFakeLocation();
     };
-  }, [id]);
+  });
 
   const {dispatch: drawerDispatch} = useDrawerContext();
   const handleSuccess = useCallback(async () => {
     closeDrawer(drawerDispatch);
   }, [drawerDispatch]);
 
-  return <UpdateProductContainer id={id} onSuccess={handleSuccess} />;
+  return <CreateProductContainer onSuccess={handleSuccess} />;
 }
