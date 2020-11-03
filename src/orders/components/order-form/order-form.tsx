@@ -35,7 +35,6 @@ export default function OrderForm({onSubmit, defaultValues}: OrderFormProps) {
                   {...field}
                   name={[field.name, "productId"]}
                   fieldKey={[field.fieldKey, "productId"]}
-                  rules={[{required: true, message: "Missing product"}]}
                   normalize={value => (value ? parseInt(value) : null)}
                 >
                   <ProductSelect />
@@ -44,7 +43,6 @@ export default function OrderForm({onSubmit, defaultValues}: OrderFormProps) {
                   {...field}
                   name={[field.name, "count"]}
                   fieldKey={[field.fieldKey, "count"]}
-                  rules={[{required: true, message: "Missing count"}]}
                 >
                   <InputNumber placeholder="10" />
                 </Form.Item>

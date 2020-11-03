@@ -36,5 +36,5 @@ interface StockTableProps {
 }
 
 export default function StockTable({data}: StockTableProps) {
-  return <Table columns={columns} dataSource={data} key="id" />;
+  return <Table columns={columns} dataSource={data} rowKey="id" />;
 }

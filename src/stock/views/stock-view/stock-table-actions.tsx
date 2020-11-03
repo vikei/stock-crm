@@ -10,7 +10,7 @@ import {
   UpdateProductsMutationVariables,
   useDeleteProductMutation,
 } from "../../../main/lib/generated";
-import ProductPreview from "../../components/product-preview";
+import ProductDrawer from "../../components/product-drawer";
 import UpdateProductDrawer from "../../components/update-product-drawer";
 
 interface StockTableActionsProps {
@@ -36,7 +36,7 @@ export default function StockTableActions({id, name, refetchProducts}: StockTabl
       openDrawer(dispatch, {
         title: name,
         width: "50vw",
-        body: <ProductPreview id={id} />,
+        body: <ProductDrawer id={id} />,
       });
     },
     [dispatch],

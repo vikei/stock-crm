@@ -5,6 +5,7 @@ import RequireNotAuth from "../../../auth/lib/require-not-auth";
 import LoginView from "../../../auth/views/login-view";
 import RegistrationView from "../../../auth/views/register-view";
 import OrdersView from "../../../orders/views/orders-view";
+import ProductView from "../../../stock/views/product-view";
 import StockView from "../../../stock/views/stock-view";
 import AppLayout from "../app-layout/app-layout";
 
@@ -25,8 +26,11 @@ export default function Router() {
         <Route path="/">
           <RequireAuth>
             <AppLayout>
-              <Route path="/stock">
+              <Route path="/stock" exact>
                 <StockView />
+              </Route>
+              <Route path="/stock/product/:id">
+                <ProductView />
               </Route>
               <Route path="/orders">
                 <OrdersView />

@@ -24,5 +24,5 @@ interface OrdersTableProps {
 }
 
 export default function OrdersTable({data}: OrdersTableProps) {
-  return <Table columns={columns} dataSource={data} key="id" />;
+  return <Table columns={columns} dataSource={data} rowKey="id" />;
 }

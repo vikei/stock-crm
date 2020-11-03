@@ -3,11 +3,11 @@ import React, {useEffect} from "react";
 import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/fake-history";
 import {ProductQueryVariables, useProductQuery} from "../../../main/lib/generated";
 
-interface ProductPreviewProps {
+interface ProductDrawerProps {
   id: ProductQueryVariables["id"];
 }
 
-export default function ProductPreview({id}: ProductPreviewProps) {
+export default function ProductDrawer({id}: ProductDrawerProps) {
   useEffect(() => {
     goToFakeLocation(`/stock/product/${id}`);
 
@@ -21,9 +21,5 @@ export default function ProductPreview({id}: ProductPreviewProps) {
     return null;
   }
 
-  return (
-    <>
-      <Typography>{data.product.description}</Typography>
-    </>
-  );
+  return <Typography>{data.product.description}</Typography>;
 }
