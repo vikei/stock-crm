@@ -4,11 +4,11 @@ import React, {useCallback} from "react";
 import {AppContentHeader} from "../../../main/components/app-layout";
 import {openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import CreateProductDrawer from "../../components/create-product-drawer";
-import {useRefetchProductsContext} from "./stock-view.lib";
+import {useRefetchProducts} from "./stock-view.lib";
 
 export default function StockHeader() {
   const {dispatch: drawerDispatch} = useDrawerContext();
-  const {refetch} = useRefetchProductsContext();
+  const {refetch} = useRefetchProducts();
   const openForm = useCallback(() => {
     openDrawer(drawerDispatch, {
       title: "Добавить продукт",

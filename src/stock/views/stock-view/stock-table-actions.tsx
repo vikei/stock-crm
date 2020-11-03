@@ -11,7 +11,7 @@ import {
 import {useMessages} from "../../../main/lib/use-messages";
 import ProductDrawer from "../../components/product-drawer";
 import UpdateProductDrawer from "../../components/update-product-drawer";
-import {useRefetchProductsContext} from "./stock-view.lib";
+import {useRefetchProducts} from "./stock-view.lib";
 
 interface StockTableActionsProps {
   id: ProductQueryVariables["id"];
@@ -43,20 +43,20 @@ export default function StockTableActions({id, name}: StockTableActionsProps) {
     [dispatch],
   );
 
-  const {refetch} = useRefetchProductsContext();
-  const [deleteProduct] = useDeleteProductMutation();
+  const {refetch} = useRefetchProducts();
+  const [deleteMutation] = useDeleteProductMutation();
   const message = useMessages();
   const remove = useCallback(
     async (id: string) => {
       try {
-        await deleteProduct({variables: {id}});
+        await deleteMutation({variables: {id}});
         message.success("Продукт успешно удален!");
         await refetch();
       } catch (e) {
         console.error(e);
       }
     },
-    [deleteProduct, message, refetch],
+    [deleteMutation, message, refetch],
   );
 
   return (

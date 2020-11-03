@@ -9,14 +9,13 @@ interface CreateProductContainerProps {
 
 export default function CreateProductContainer({onSuccess}: CreateProductContainerProps) {
   const history = useHistory();
-  const [createProduct] = useCreateProductsMutation();
+  const [createMutation] = useCreateProductsMutation();
 
   const onSubmit = useCallback(
     async values => {
       try {
-        const {data} = await createProduct({variables: {input: values}});
+        const {data} = await createMutation({variables: {input: values}});
         const id = data?.createProduct?.id;
-
         if (!id) {
           return;
         }
@@ -30,7 +29,7 @@ export default function CreateProductContainer({onSuccess}: CreateProductContain
         console.error(e);
       }
     },
-    [createProduct, history, onSuccess],
+    [createMutation, history, onSuccess],
   );
 
   return <ProductForm onSubmit={onSubmit} />;

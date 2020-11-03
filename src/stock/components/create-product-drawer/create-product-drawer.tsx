@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from "react";
 import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/fake-history";
 import {closeDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {ProductQueryVariables} from "../../../main/lib/generated";
-import useProductMessage from "../../lib/show-product-message";
+import useProductMessage from "../../lib/use-show-product-message";
 import CreateProductContainer from "../create-product-container";
 
 interface CreateProductDrawerProps {

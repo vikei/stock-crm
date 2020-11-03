@@ -15,11 +15,11 @@ interface UpdateProductContainerProps {
 export default function UpdateProductContainer({id, onSuccess}: UpdateProductContainerProps) {
   const history = useHistory();
 
-  const [update] = useUpdateProductsMutation();
+  const [updateMutation] = useUpdateProductsMutation();
   const onSubmit = useCallback(
     async values => {
       try {
-        const {data} = await update({variables: {input: values, id}});
+        const {data} = await updateMutation({variables: {input: values, id}});
         if (onSuccess) {
           onSuccess();
         } else {
@@ -29,7 +29,7 @@ export default function UpdateProductContainer({id, onSuccess}: UpdateProductCon
         console.error(e);
       }
     },
-    [history, id, onSuccess, update],
+    [history, id, onSuccess, updateMutation],
   );
 
   const {data} = useProductQuery({variables: {id}});

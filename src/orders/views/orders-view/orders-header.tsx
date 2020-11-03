@@ -4,12 +4,12 @@ import React, {useCallback} from "react";
 import {AppContentHeader} from "../../../main/components/app-layout";
 import {openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import CreateOrderDrawer from "../../components/create-order-drawer";
-import {useRefetchOrdersContext} from "./orders-view.lib";
+import {useRefetchOrders} from "./orders-view.lib";
 
 export default function OrdersHeader() {
   const {dispatch: drawerDispatch} = useDrawerContext();
-  const {refetch} = useRefetchOrdersContext();
-  const openProductForm = useCallback(() => {
+  const {refetch} = useRefetchOrders();
+  const openForm = useCallback(() => {
     openDrawer(drawerDispatch, {
       title: "Добавить Заказ",
       body: <CreateOrderDrawer onSuccess={refetch} />,
@@ -20,7 +20,7 @@ export default function OrdersHeader() {
   return (
     <AppContentHeader>
       <div>
-        <Button icon={<PlusSquareOutlined />} onClick={openProductForm}>
+        <Button icon={<PlusSquareOutlined />} onClick={openForm}>
           Добавить Заказ
         </Button>
       </div>

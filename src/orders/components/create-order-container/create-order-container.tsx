@@ -9,14 +9,13 @@ interface CreateOrderContainerProps {
 
 export default function CreateOrderContainer({onSuccess}: CreateOrderContainerProps) {
   const history = useHistory();
-  const [createOrder] = useCreateOrderMutation();
+  const [createMutation] = useCreateOrderMutation();
 
   const handleSubmit = useCallback(
     async values => {
       try {
-        const {data} = await createOrder({variables: {input: values}});
+        const {data} = await createMutation({variables: {input: values}});
         const id = data?.createOrder?.id;
-
         if (!id) {
           return;
         }
@@ -30,7 +29,7 @@ export default function CreateOrderContainer({onSuccess}: CreateOrderContainerPr
         console.error(e);
       }
     },
-    [createOrder, history, onSuccess],
+    [createMutation, history, onSuccess],
   );
 
   return <OrderForm onSubmit={handleSubmit} />;

@@ -6,7 +6,7 @@ export type RefetchOrders = () => Promise<ApolloQueryResult<OrdersQuery>>;
 
 export const RefetchOrdersContext = createContext<{refetch: RefetchOrders} | undefined>(undefined);
 
-export function useRefetchOrdersContext() {
+export function useRefetchOrders() {
   const ctx = useContext(RefetchOrdersContext);
   if (!ctx) {
     throw new Error("You must wrap in RefetchOrdersContext.Provider");

@@ -10,7 +10,7 @@ import {
 import {useMessages} from "../../../main/lib/use-messages";
 import OrderDrawer from "../../components/order-drawer";
 import UpdateOrderDrawer from "../../components/update-order-drawer";
-import {useRefetchOrdersContext} from "./orders-view.lib";
+import {useRefetchOrders} from "./orders-view.lib";
 
 interface OrdersTableActionsProps {
   id: OrderQueryVariables["id"];
@@ -41,20 +41,20 @@ export default function OrdersTableActions({id}: OrdersTableActionsProps) {
     [dispatch],
   );
 
-  const {refetch} = useRefetchOrdersContext();
+  const {refetch} = useRefetchOrders();
   const message = useMessages();
-  const [deleteOrder] = useDeleteOrderMutation();
+  const [deleteMutation] = useDeleteOrderMutation();
   const remove = useCallback(
     async (id: string) => {
       try {
-        await deleteOrder({variables: {id}});
+        await deleteMutation({variables: {id}});
         message.success("Заказ успешно удален!");
         await refetch();
       } catch (e) {
         console.error(e);
       }
     },
-    [deleteOrder, message, refetch],
+    [deleteMutation, message, refetch],
   );
 
   return (

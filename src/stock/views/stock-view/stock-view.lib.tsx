@@ -8,7 +8,7 @@ export const RefetchProductsContext = createContext<{refetch: RefetchProducts} |
   undefined,
 );
 
-export function useRefetchProductsContext() {
+export function useRefetchProducts() {
   const ctx = useContext(RefetchProductsContext);
   if (!ctx) {
     throw new Error("You must wrap in RefetchProductsContext.Provider");
