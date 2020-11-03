@@ -10,6 +10,7 @@ import {
   UpdateProductsMutationVariables,
   useDeleteProductMutation,
 } from "../../../main/lib/generated";
+import {useMessages} from "../../../main/lib/use-messages";
 import ProductDrawer from "../../components/product-drawer";
 import UpdateProductDrawer from "../../components/update-product-drawer";
 
@@ -45,16 +46,18 @@ export default function StockTableActions({id, name, refetchProducts}: StockTabl
   );
 
   const [deleteProduct] = useDeleteProductMutation();
+  const message = useMessages();
   const remove = useCallback(
     async (id: string) => {
       try {
         await deleteProduct({variables: {id}});
+        message.success("Продукт успешно удален!");
         await refetchProducts();
       } catch (e) {
         console.error(e);
       }
     },
-    [deleteProduct, refetchProducts],
+    [deleteProduct, message, refetchProducts],
   );
 
   return (

@@ -7,7 +7,6 @@ import CreateProductDrawer from "../../components/create-product-drawer";
 
 export default function StockHeader() {
   const {dispatch: drawerDispatch} = useDrawerContext();
-
   const openForm = useCallback(() => {
     openDrawer(drawerDispatch, {
       title: "Добавить продукт",

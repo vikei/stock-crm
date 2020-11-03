@@ -9,44 +9,47 @@ import CreateProductView from "../../../stock/views/create-product-view";
 import ProductView from "../../../stock/views/product-view";
 import StockView from "../../../stock/views/stock-view";
 import UpdateProductView from "../../../stock/views/update-product-view";
+import {MessagesProvider} from "../../lib/use-messages";
 import AppLayout from "../app-layout/app-layout";
 
 export default function Router() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/login" exact>
-          <RequireNotAuth>
-            <LoginView />
-          </RequireNotAuth>
-        </Route>
-        <Route path="/registration" exact>
-          <RequireNotAuth>
-            <RegistrationView />
-          </RequireNotAuth>
-        </Route>
-        <Route path="/">
-          <RequireAuth>
-            <AppLayout>
-              <Route path="/stock" exact>
-                <StockView />
-              </Route>
-              <Route path="/stock/product/:id" exact>
-                <ProductView />
-              </Route>
-              <Route path="/stock/product/:id/update" exact>
-                <UpdateProductView />
-              </Route>
-              <Route path="/stock/product/create">
-                <CreateProductView />
-              </Route>
-              <Route path="/orders">
-                <OrdersView />
-              </Route>
-            </AppLayout>
-          </RequireAuth>
-        </Route>
-      </Switch>
+      <MessagesProvider>
+        <Switch>
+          <Route path="/login" exact>
+            <RequireNotAuth>
+              <LoginView />
+            </RequireNotAuth>
+          </Route>
+          <Route path="/registration" exact>
+            <RequireNotAuth>
+              <RegistrationView />
+            </RequireNotAuth>
+          </Route>
+          <Route path="/">
+            <RequireAuth>
+              <AppLayout>
+                <Route path="/stock" exact>
+                  <StockView />
+                </Route>
+                <Route path="/stock/product/:id" exact>
+                  <ProductView />
+                </Route>
+                <Route path="/stock/product/:id/update" exact>
+                  <UpdateProductView />
+                </Route>
+                <Route path="/stock/product/create">
+                  <CreateProductView />
+                </Route>
+                <Route path="/orders">
+                  <OrdersView />
+                </Route>
+              </AppLayout>
+            </RequireAuth>
+          </Route>
+        </Switch>
+      </MessagesProvider>
     </BrowserRouter>
   );
 }

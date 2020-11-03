@@ -20,8 +20,11 @@ export default function UpdateProductContainer({id, onSuccess}: UpdateProductCon
     async values => {
       try {
         const {data} = await updateProduct({variables: {input: values, id}});
-        history.push(`/stock/product/${data?.updateProduct?.id}`);
-        onSuccess?.();
+        if (onSuccess) {
+          onSuccess();
+        } else {
+          history.push(`/stock/product/${data?.updateProduct?.id}`);
+        }
       } catch (e) {
         console.error(e);
       }

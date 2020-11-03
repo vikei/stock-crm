@@ -1,10 +1,10 @@
 import React, {useCallback} from "react";
 import {useHistory} from "react-router-dom";
-import {useCreateProductsMutation} from "../../../main/lib/generated";
+import {ProductQueryVariables, useCreateProductsMutation} from "../../../main/lib/generated";
 import ProductForm from "../product-form/product-from";
 
 interface CreateProductContainerProps {
-  onSuccess?: () => void;
+  onSuccess?: (id: ProductQueryVariables["id"]) => void;
 }
 
 export default function CreateProductContainer({onSuccess}: CreateProductContainerProps) {
@@ -14,8 +14,17 @@ export default function CreateProductContainer({onSuccess}: CreateProductContain
     async values => {
       try {
         const {data} = await createProduct({variables: {input: values}});
-        history.push(`/stock/product/${data?.createProduct?.id}`);
-        onSuccess?.();
+        const id = data?.createProduct?.id;
+
+        if (!id) {
+          return;
+        }
+
+        if (onSuccess) {
+          onSuccess(id);
+        } else {
+          history.push(`/stock/product/${id}`);
+        }
       } catch (e) {
         console.error(e);
       }
