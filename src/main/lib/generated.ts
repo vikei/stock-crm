@@ -25,6 +25,7 @@ export type Product = {
   name: Scalars["String"];
   description: Scalars["String"];
   price: Scalars["Float"];
+  available: Scalars["Boolean"];
   stockCount: Scalars["Int"];
 };
 
@@ -61,6 +62,7 @@ export type ProductInput = {
   description: Scalars["String"];
   price: Scalars["Float"];
   stockCount: Scalars["Int"];
+  available: Scalars["Boolean"];
 };
 
 export type UserCredentials = {
@@ -217,7 +219,7 @@ export type DeleteProductMutation = {__typename?: "Mutation"} & Pick<Mutation, "
 
 export type ProductFieldsFragment = {__typename?: "Product"} & Pick<
   Product,
-  "id" | "name" | "description" | "price" | "stockCount"
+  "id" | "name" | "description" | "price" | "available" | "stockCount"
 >;
 
 export type ProductQueryVariables = Exact<{
@@ -252,6 +254,7 @@ export const ProductFieldsFragmentDoc = gql`
     name
     description
     price
+    available
     stockCount
   }
 `;

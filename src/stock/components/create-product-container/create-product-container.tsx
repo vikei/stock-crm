@@ -1,5 +1,4 @@
 import React, {useCallback} from "react";
-import {useHistory} from "react-router-dom";
 import {ProductQueryVariables, useCreateProductsMutation} from "../../../main/lib/generated";
 import ProductForm from "../product-form/product-from";
 
@@ -8,28 +7,20 @@ interface CreateProductContainerProps {
 }
 
 export default function CreateProductContainer({onSuccess}: CreateProductContainerProps) {
-  const history = useHistory();
   const [createMutation] = useCreateProductsMutation();
-
   const onSubmit = useCallback(
     async values => {
       try {
         const {data} = await createMutation({variables: {input: values}});
         const id = data?.createProduct?.id;
-        if (!id) {
-          return;
-        }
-
-        if (onSuccess) {
-          onSuccess(id);
-        } else {
-          history.push(`/stock/product/${id}`);
+        if (id) {
+          onSuccess?.(id);
         }
       } catch (e) {
         console.error(e);
       }
     },
-    [createMutation, history, onSuccess],
+    [createMutation, onSuccess],
   );
 
   return <ProductForm onSubmit={onSubmit} />;

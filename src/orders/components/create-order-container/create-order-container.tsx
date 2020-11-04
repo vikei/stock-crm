@@ -1,5 +1,4 @@
 import React, {useCallback} from "react";
-import {useHistory} from "react-router-dom";
 import {OrderQueryVariables, useCreateOrderMutation} from "../../../main/lib/generated";
 import OrderForm from "../order-form";
 
@@ -8,7 +7,6 @@ interface CreateOrderContainerProps {
 }
 
 export default function CreateOrderContainer({onSuccess}: CreateOrderContainerProps) {
-  const history = useHistory();
   const [createMutation] = useCreateOrderMutation();
 
   const handleSubmit = useCallback(
@@ -16,20 +14,14 @@ export default function CreateOrderContainer({onSuccess}: CreateOrderContainerPr
       try {
         const {data} = await createMutation({variables: {input: values}});
         const id = data?.createOrder?.id;
-        if (!id) {
-          return;
-        }
-
-        if (onSuccess) {
-          onSuccess(id);
-        } else {
-          history.push(`/orders/${id}`);
+        if (id) {
+          onSuccess?.(id);
         }
       } catch (e) {
         console.error(e);
       }
     },
-    [createMutation, history, onSuccess],
+    [createMutation, onSuccess],
   );
 
   return <OrderForm onSubmit={handleSubmit} />;

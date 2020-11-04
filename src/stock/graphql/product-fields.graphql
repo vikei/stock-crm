@@ -3,5 +3,6 @@ fragment ProductFields on Product {
     name
     description
     price
+    available
     stockCount
 }
