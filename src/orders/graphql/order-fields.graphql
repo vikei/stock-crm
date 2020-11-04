@@ -1,5 +1,6 @@
 fragment OrderFields on Order {
     id
+    status
     inventory {
         productId
         count

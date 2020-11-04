@@ -1,7 +1,7 @@
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
-import {Button, Form, InputNumber, Space} from "antd";
+import {Button, Form, InputNumber, Select, Space} from "antd";
 import React from "react";
-import {Order, OrderInput} from "../../../main/lib/generated";
+import {Order, OrderInput, OrderStatus} from "../../../main/lib/generated";
 import ProductSelect from "../product-select";
 
 interface OrderFormProps {
@@ -22,9 +22,18 @@ export default function OrderForm({onSubmit, defaultValues}: OrderFormProps) {
                 count: inventoryItem.count,
               })),
             }
-          : undefined
+          : {status: OrderStatus.Processing}
       }
     >
+      <Form.Item label="Статус" name="status">
+        <Select>
+          {Object.values(OrderStatus).map(status => (
+            <Select.Option key={status} value={status}>
+              {status}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
       <Form.List name="inventory">
         {(fields, {add, remove}) => (
           <>

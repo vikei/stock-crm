@@ -38,9 +38,19 @@ export type OrderInventoryItem = {
 export type Order = {
   __typename?: "Order";
   id: Scalars["ID"];
+  status: OrderStatus;
   inventory: Array<OrderInventoryItem>;
   products: Array<Product>;
 };
+
+export enum OrderStatus {
+  AwaitingProcessing = "AWAITING_PROCESSING",
+  Processing = "PROCESSING",
+  Shipped = "SHIPPED",
+  Delivered = "DELIVERED",
+  NotDelivered = "NOT_DELIVERED",
+  Canceled = "CANCELED",
+}
 
 export type User = {
   __typename?: "User";
@@ -55,6 +65,7 @@ export type OrderInventoryInput = {
 
 export type OrderInput = {
   inventory: Array<OrderInventoryInput>;
+  status: OrderStatus;
 };
 
 export type ProductInput = {
@@ -173,7 +184,7 @@ export type DeleteOrderMutationVariables = Exact<{
 
 export type DeleteOrderMutation = {__typename?: "Mutation"} & Pick<Mutation, "deleteOrder">;
 
-export type OrderFieldsFragment = {__typename?: "Order"} & Pick<Order, "id"> & {
+export type OrderFieldsFragment = {__typename?: "Order"} & Pick<Order, "id" | "status"> & {
     inventory: Array<
       {__typename?: "OrderInventoryItem"} & Pick<OrderInventoryItem, "productId" | "count">
     >;
@@ -261,6 +272,7 @@ export const ProductFieldsFragmentDoc = gql`
 export const OrderFieldsFragmentDoc = gql`
   fragment OrderFields on Order {
     id
+    status
     inventory {
       productId
       count

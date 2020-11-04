@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import {ProductQueryVariables, useCreateProductsMutation} from "../../../main/lib/generated";
-import ProductForm from "../product-form/product-from";
+import ProductForm from "../product-form/product-form";
 
 interface CreateProductContainerProps {
   onSuccess?: (id: ProductQueryVariables["id"]) => void;

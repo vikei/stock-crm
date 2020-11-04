@@ -11,6 +11,11 @@ const columns: ColumnsType<Order> = [
     key: "id",
   },
   {
+    title: "Статус",
+    dataIndex: "status",
+    key: "status",
+  },
+  {
     title: "Действия",
     key: "actions",
     render: function TableActions(_, {id}) {

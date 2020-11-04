@@ -4,7 +4,7 @@ import {
   useProductQuery,
   useUpdateProductsMutation,
 } from "../../../main/lib/generated";
-import ProductForm from "../product-form/product-from";
+import ProductForm from "../product-form/product-form";
 
 interface UpdateProductContainerProps {
   id: ProductQueryVariables["id"];

@@ -1,1 +1,1 @@
-export {default} from "./product-from";
+export {default} from "./product-form";
