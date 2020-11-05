@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect} from "react";
-import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/fake-history";
+import React, {useCallback} from "react";
+import useFakeLocation from "../../../library/lib/use-fake-location";
 import {closeDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {ProductQueryVariables} from "../../../main/lib/generated";
 import useProductMessage from "../../lib/use-show-product-message";
@@ -10,13 +10,7 @@ interface UpdateProductDrawerProps {
 }
 
 export default function UpdateProductDrawer({id}: UpdateProductDrawerProps) {
-  useEffect(() => {
-    goToFakeLocation(`/stock/product/${id}/update`);
-
-    return () => {
-      goBackFromFakeLocation();
-    };
-  }, [id]);
+  useFakeLocation(`/stock/product/${id}/update`);
 
   const {dispatch: drawerDispatch} = useDrawerContext();
   const message = useProductMessage();

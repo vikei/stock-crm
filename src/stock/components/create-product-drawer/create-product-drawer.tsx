@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect} from "react";
-import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/fake-history";
+import React, {useCallback} from "react";
+import useFakeLocation from "../../../library/lib/use-fake-location";
 import {closeDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {ProductQueryVariables} from "../../../main/lib/generated";
 import useProductMessage from "../../lib/use-show-product-message";
@@ -10,13 +10,7 @@ interface CreateProductDrawerProps {
 }
 
 export default function CreateProductDrawer({onSuccess}: CreateProductDrawerProps) {
-  useEffect(() => {
-    goToFakeLocation("/stock/product/create");
-
-    return () => {
-      goBackFromFakeLocation();
-    };
-  });
+  useFakeLocation("/stock/product/create");
 
   const {dispatch: drawerDispatch} = useDrawerContext();
   const message = useProductMessage();

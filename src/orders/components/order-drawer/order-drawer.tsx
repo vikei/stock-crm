@@ -1,6 +1,6 @@
 import {Typography} from "antd";
-import React, {useEffect} from "react";
-import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/fake-history";
+import React from "react";
+import useFakeLocation from "../../../library/lib/use-fake-location";
 import {OrderQueryVariables, useOrderQuery} from "../../../main/lib/generated";
 
 interface OrderDrawerProps {
@@ -8,13 +8,7 @@ interface OrderDrawerProps {
 }
 
 export default function OrderDrawer({id}: OrderDrawerProps) {
-  useEffect(() => {
-    goToFakeLocation(`/orders/${id}`);
-
-    return () => {
-      goBackFromFakeLocation();
-    };
-  }, [id]);
+  useFakeLocation(`/orders/${id}`);
 
   const {data} = useOrderQuery({variables: {id}});
   if (!data?.order) {

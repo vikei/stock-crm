@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect} from "react";
-import {goBackFromFakeLocation, goToFakeLocation} from "../../../library/utils/fake-history";
+import React, {useCallback} from "react";
+import useFakeLocation from "../../../library/lib/use-fake-location";
 import {closeDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {OrderQueryVariables} from "../../../main/lib/generated";
 import useOrderMessage from "../../lib/use-show-order-message";
@@ -10,13 +10,7 @@ interface UpdateOrderDrawerProps {
 }
 
 export default function UpdateOrderDrawer({id}: UpdateOrderDrawerProps) {
-  useEffect(() => {
-    goToFakeLocation(`/orders/${id}/update`);
-
-    return () => {
-      goBackFromFakeLocation();
-    };
-  }, [id]);
+  useFakeLocation(`/orders/${id}/update`);
 
   const {dispatch: drawerDispatch} = useDrawerContext();
   const message = useOrderMessage();
