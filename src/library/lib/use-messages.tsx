@@ -18,6 +18,6 @@ export function MessagesProvider({children}: {children: ReactNode}) {
   );
 }
 
-export function useMessages() {
+export default function useMessages() {
   return useRequiredContext(MessagesContext);
 }

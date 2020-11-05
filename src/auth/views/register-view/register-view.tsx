@@ -1,8 +1,8 @@
 import {Button, Card, Form, Input} from "antd";
 import React, {useCallback} from "react";
 import {UserCredentials, useRegisterMutation} from "../../../main/lib/generated";
-import {setUser, useAuth} from "../../lib/use-auth";
-import {RegistrationContainer} from "./register-view.styled";
+import useAuth, {setUser} from "../../lib/use-auth";
+import {RegistrationContainer} from "./styled";
 
 export default function RegistrationView() {
   const [register] = useRegisterMutation();

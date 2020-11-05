@@ -1,5 +1,5 @@
 import React, {useCallback} from "react";
-import {useMessages} from "../../library/lib/use-messages";
+import useMessages from "../../library/lib/use-messages";
 import SaveProductMessage from "../components/save-product-message";
 
 export default function useProductMessage() {

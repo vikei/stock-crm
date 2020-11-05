@@ -54,6 +54,6 @@ export function AuthProvider({children}: {children: ReactNode}) {
   return <AuthContext.Provider value={[state, dispatch]}>{children}</AuthContext.Provider>;
 }
 
-export function useAuth() {
+export default function useAuth() {
   return useRequiredContext(AuthContext);
 }
