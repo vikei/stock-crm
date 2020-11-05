@@ -2,7 +2,7 @@ import React, {useCallback} from "react";
 import useFakeLocation from "../../../library/lib/use-fake-location";
 import useDrawer, {closeDrawer} from "../../../library/lib/use-drawer";
 import {ProductQueryVariables} from "../../../main/lib/generated";
-import useProductMessage from "../../lib/use-show-product-message";
+import useProductMessage from "../../lib/use-product-message";
 import UpdateProductContainer from "../update-product-container";
 
 interface UpdateProductDrawerProps {

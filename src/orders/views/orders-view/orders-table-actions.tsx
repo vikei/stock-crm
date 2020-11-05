@@ -7,7 +7,7 @@ import {
   UpdateOrderMutationVariables,
   useDeleteOrderMutation,
 } from "../../../main/lib/generated";
-import {useMessages} from "../../../main/lib/use-messages";
+import {useMessages} from "../../../library/lib/use-messages";
 import OrderDrawer from "../../components/order-drawer";
 import UpdateOrderDrawer from "../../components/update-order-drawer";
 import {useRefetchOrders} from "./orders-view.lib";

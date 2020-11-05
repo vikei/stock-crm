@@ -1,5 +1,5 @@
 import React, {useCallback} from "react";
-import {useMessages} from "../../main/lib/use-messages";
+import {useMessages} from "../../library/lib/use-messages";
 import SaveOrderMessage from "../components/save-order-message";
 
 export default function useOrderMessage() {

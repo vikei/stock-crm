@@ -1,6 +1,7 @@
 import {message} from "antd";
 import {MessageInstance} from "antd/lib/message";
-import React, {createContext, ReactNode, useContext} from "react";
+import React, {createContext, ReactNode} from "react";
+import useRequiredContext from "./use-required-context";
 
 const MessagesContext = createContext<MessageInstance | undefined>(undefined);
 
@@ -18,9 +19,5 @@ export function MessagesProvider({children}: {children: ReactNode}) {
 }
 
 export function useMessages() {
-  const ctx = useContext(MessagesContext);
-  if (!ctx) {
-    throw new Error("You must wrap in MessagesProvider");
-  }
-  return ctx;
+  return useRequiredContext(MessagesContext);
 }

@@ -1,5 +1,6 @@
 import {ApolloQueryResult} from "@apollo/client";
-import {createContext, useContext} from "react";
+import {createContext} from "react";
+import useRequiredContext from "../../../library/lib/use-required-context";
 import {OrdersQuery} from "../../../main/lib/generated";
 
 export type RefetchOrders = () => Promise<ApolloQueryResult<OrdersQuery>>;
@@ -7,9 +8,5 @@ export type RefetchOrders = () => Promise<ApolloQueryResult<OrdersQuery>>;
 export const RefetchOrdersContext = createContext<{refetch: RefetchOrders} | undefined>(undefined);
 
 export function useRefetchOrders() {
-  const ctx = useContext(RefetchOrdersContext);
-  if (!ctx) {
-    throw new Error("You must wrap in RefetchOrdersContext.Provider");
-  }
-  return ctx;
+  return useRequiredContext(RefetchOrdersContext);
 }

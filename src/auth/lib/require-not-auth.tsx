@@ -1,9 +1,9 @@
 import React, {ReactNode, useEffect} from "react";
 import {useHistory} from "react-router-dom";
-import {useAuthContext} from "./auth-context";
+import {useAuth} from "./auth-context";
 
 export default function RequireNotAuth({children}: {children: ReactNode}) {
-  const [{user}] = useAuthContext();
+  const [{user}] = useAuth();
   const history = useHistory();
 
   useEffect(() => {

@@ -1,4 +1,5 @@
-import React, {createContext, Dispatch, ReactNode, useContext, useReducer} from "react";
+import React, {createContext, Dispatch, ReactNode, useReducer} from "react";
+import useRequiredContext from "../../library/lib/use-required-context";
 import {User} from "../../main/lib/generated";
 
 interface AuthState {
@@ -37,7 +38,7 @@ export function logout(dispatch: Dispatch<AuthActions>) {
   return dispatch({type: "logout"});
 }
 
-function useAuth() {
+function useAuthReducer() {
   return useReducer(authReducer, {user: null}, initState => {
     const userDraft = localStorage.getItem("user");
     const user = userDraft ? JSON.parse(userDraft) : null;
@@ -45,17 +46,14 @@ function useAuth() {
   });
 }
 
-const AuthContext = createContext<ReturnType<typeof useAuth> | undefined>(undefined);
+const AuthContext = createContext<ReturnType<typeof useAuthReducer> | undefined>(undefined);
+AuthContext.displayName = "AuthProvider";
 
 export function AuthProvider({children}: {children: ReactNode}) {
-  const [state, dispatch] = useAuth();
+  const [state, dispatch] = useAuthReducer();
   return <AuthContext.Provider value={[state, dispatch]}>{children}</AuthContext.Provider>;
 }
 
-export function useAuthContext() {
-  const ctx = useContext(AuthContext);
-  if (!ctx) {
-    throw new Error("Expect to wrap in AuthProvider");
-  }
-  return ctx;
+export function useAuth() {
+  return useRequiredContext(AuthContext);
 }

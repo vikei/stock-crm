@@ -1,12 +1,12 @@
 import {Button, Card, Form, Input} from "antd";
 import React, {useCallback} from "react";
 import {useLoginMutation, UserCredentials} from "../../../main/lib/generated";
-import {setUser, useAuthContext} from "../../lib/auth-context";
+import {setUser, useAuth} from "../../lib/auth-context";
 import {LoginContainer} from "./login-view.styled";
 
 export default function LoginView() {
   const [login] = useLoginMutation();
-  const [, dispatch] = useAuthContext();
+  const [, dispatch] = useAuth();
 
   const submit = useCallback(
     async (values: UserCredentials) => {

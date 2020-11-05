@@ -1,4 +1,5 @@
-import React, {createContext, Dispatch, ReactNode, useContext, useReducer} from "react";
+import React, {createContext, Dispatch, ReactNode, useReducer} from "react";
+import useRequiredContext from "./use-required-context";
 
 interface DrawerState {
   open: boolean;
@@ -42,18 +43,16 @@ function useDrawerReducer() {
   return useReducer(drawerReducer, {open: false, body: null});
 }
 
-const UseDrawer = createContext<ReturnType<typeof useDrawerReducer> | undefined>(undefined);
+const DrawerContext = createContext<ReturnType<typeof useDrawerReducer> | undefined>(undefined);
+DrawerContext.displayName = "DrawerProvider";
 
 export function DrawerProvider({children}: {children: ReactNode}) {
   const [state, dispatch] = useDrawerReducer();
-  return <UseDrawer.Provider value={[state, dispatch]}>{children}</UseDrawer.Provider>;
+  return <DrawerContext.Provider value={[state, dispatch]}>{children}</DrawerContext.Provider>;
 }
 
 export default function useDrawer() {
-  const ctx = useContext(UseDrawer);
-  if (!ctx) {
-    throw new Error("Expect to wrap in DrawerProvider");
-  }
+  const ctx = useRequiredContext(DrawerContext);
   return {
     state: ctx[0],
     dispatch: ctx[1],
