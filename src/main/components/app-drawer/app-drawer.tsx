@@ -1,12 +1,12 @@
 import {Drawer} from "antd";
 import React from "react";
-import {useDrawerContext} from "../../lib/drawer-context";
+import {useDrawer} from "../../lib/drawer-context";
 
 export default function AppDrawer() {
   const {
     state: {body},
     getProps,
-  } = useDrawerContext();
+  } = useDrawer();
 
   return <Drawer {...getProps()}>{body}</Drawer>;
 }

@@ -2,12 +2,12 @@ import {PlusSquareOutlined} from "@ant-design/icons";
 import {Button} from "antd";
 import React, {useCallback} from "react";
 import {AppContentHeader} from "../../../main/components/app-layout";
-import {openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
+import {openDrawer, useDrawer} from "../../../main/lib/drawer-context";
 import CreateOrderDrawer from "../../components/create-order-drawer";
 import {useRefetchOrders} from "./orders-view.lib";
 
 export default function OrdersHeader() {
-  const {dispatch: drawerDispatch} = useDrawerContext();
+  const {dispatch: drawerDispatch} = useDrawer();
   const {refetch} = useRefetchOrders();
   const openForm = useCallback(() => {
     openDrawer(drawerDispatch, {

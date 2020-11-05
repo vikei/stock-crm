@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import useFakeLocation from "../../../library/lib/use-fake-location";
-import {closeDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
+import {closeDrawer, useDrawer} from "../../../main/lib/drawer-context";
 import {OrderQueryVariables} from "../../../main/lib/generated";
 import useOrderMessage from "../../lib/use-show-order-message";
 import CreateOrderContainer from "../create-order-container";
@@ -12,7 +12,7 @@ interface CreateOrderDrawerProps {
 export default function CreateOrderDrawer({onSuccess}: CreateOrderDrawerProps) {
   useFakeLocation("/orders/create");
 
-  const {dispatch: drawerDispatch} = useDrawerContext();
+  const {dispatch: drawerDispatch} = useDrawer();
   const message = useOrderMessage();
   const handleSuccess = useCallback(
     async (id: OrderQueryVariables["id"]) => {

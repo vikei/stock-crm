@@ -2,12 +2,12 @@ import {PlusSquareOutlined} from "@ant-design/icons";
 import {Button} from "antd";
 import React, {useCallback} from "react";
 import {AppContentHeader} from "../../../main/components/app-layout";
-import {openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
+import {openDrawer, useDrawer} from "../../../main/lib/drawer-context";
 import CreateProductDrawer from "../../components/create-product-drawer";
 import {useRefetchProducts} from "./stock-view.lib";
 
 export default function StockHeader() {
-  const {dispatch: drawerDispatch} = useDrawerContext();
+  const {dispatch: drawerDispatch} = useDrawer();
   const {refetch} = useRefetchProducts();
   const openForm = useCallback(() => {
     openDrawer(drawerDispatch, {

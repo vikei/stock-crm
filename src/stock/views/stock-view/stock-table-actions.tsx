@@ -1,7 +1,7 @@
 import {DeleteOutlined, EditOutlined, EyeOutlined} from "@ant-design/icons";
 import {Button, Space} from "antd";
 import React, {useCallback} from "react";
-import {openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
+import {openDrawer, useDrawer} from "../../../main/lib/drawer-context";
 import {
   Product,
   ProductQueryVariables,
@@ -19,7 +19,7 @@ interface StockTableActionsProps {
 }
 
 export default function StockTableActions({id, name}: StockTableActionsProps) {
-  const {dispatch} = useDrawerContext();
+  const {dispatch} = useDrawer();
 
   const openPreview = useCallback(
     ({id, name}: {id: ProductQueryVariables["id"]; name: string}) => {

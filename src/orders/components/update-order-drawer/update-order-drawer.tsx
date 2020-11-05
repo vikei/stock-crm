@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import useFakeLocation from "../../../library/lib/use-fake-location";
-import {closeDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
+import {closeDrawer, useDrawer} from "../../../main/lib/drawer-context";
 import {OrderQueryVariables} from "../../../main/lib/generated";
 import useOrderMessage from "../../lib/use-show-order-message";
 import UpdateOrderContainer from "../update-order-container";
@@ -12,7 +12,7 @@ interface UpdateOrderDrawerProps {
 export default function UpdateOrderDrawer({id}: UpdateOrderDrawerProps) {
   useFakeLocation(`/orders/${id}/update`);
 
-  const {dispatch: drawerDispatch} = useDrawerContext();
+  const {dispatch: drawerDispatch} = useDrawer();
   const message = useOrderMessage();
   const handleSuccess = useCallback(async () => {
     closeDrawer(drawerDispatch);
