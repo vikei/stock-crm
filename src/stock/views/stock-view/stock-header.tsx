@@ -4,7 +4,7 @@ import React, {useCallback} from "react";
 import useDrawer, {openDrawer} from "../../../library/lib/use-drawer";
 import {AppContentHeader} from "../../../main/components/app-layout";
 import CreateProductDrawer from "../../components/create-product-drawer";
-import {useRefetchProducts} from "./stock-view.lib";
+import {useRefetchProducts} from "./lib";
 
 export default function StockHeader() {
   const {dispatch: drawerDispatch} = useDrawer();

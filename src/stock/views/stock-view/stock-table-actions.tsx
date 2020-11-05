@@ -11,7 +11,7 @@ import {
 import useMessages from "../../../library/lib/use-messages";
 import ProductDrawer from "../../components/product-drawer";
 import UpdateProductDrawer from "../../components/update-product-drawer";
-import {useRefetchProducts} from "./stock-view.lib";
+import {useRefetchProducts} from "./lib";
 
 interface StockTableActionsProps {
   id: ProductQueryVariables["id"];

@@ -3,7 +3,7 @@ import {Button, Form, InputNumber, Select, Space} from "antd";
 import React from "react";
 import {Order, OrderInput, OrderStatus} from "../../../main/lib/generated";
 import ProductSelect from "../product-select";
-import {getDefaultOrderValues} from "./order-form.lib";
+import {getDefaultOrderValues} from "./lib";
 
 interface OrderFormProps {
   onSubmit: (values: OrderInput) => Promise<void>;

@@ -4,7 +4,7 @@ import React, {useCallback} from "react";
 import {AppContentHeader} from "../../../main/components/app-layout";
 import useDrawer, {openDrawer} from "../../../library/lib/use-drawer";
 import CreateOrderDrawer from "../../components/create-order-drawer";
-import {useRefetchOrders} from "./orders-view.lib";
+import {useRefetchOrders} from "./lib";
 
 export default function OrdersHeader() {
   const {dispatch: drawerDispatch} = useDrawer();

@@ -3,7 +3,7 @@ import {AppContent} from "../../../main/components/app-layout";
 import {useOrdersQuery} from "../../../main/lib/generated";
 import OrdersTable from "./order-table";
 import OrdersHeader from "./orders-header";
-import {RefetchOrdersContext} from "./orders-view.lib";
+import {RefetchOrdersContext} from "./lib";
 
 export default function OrdersView() {
   const {data, refetch} = useOrdersQuery();

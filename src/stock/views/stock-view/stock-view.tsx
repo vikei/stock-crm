@@ -3,7 +3,7 @@ import {AppContent} from "../../../main/components/app-layout";
 import {useProductsQuery} from "../../../main/lib/generated";
 import StockHeader from "./stock-header";
 import StockTable from "./stock-table";
-import {RefetchProductsContext} from "./stock-view.lib";
+import {RefetchProductsContext} from "./lib";
 
 export default function StockView() {
   const {data, refetch} = useProductsQuery();

@@ -1,7 +1,7 @@
 import {Button, Checkbox, Form, Input, InputNumber} from "antd";
 import React, {useCallback} from "react";
 import {Product, ProductInput} from "../../../main/lib/generated";
-import {getDefaultProductValues} from "./product-form.lib";
+import {getDefaultProductValues} from "./lib";
 
 interface ProductFormProps {
   onSubmit: (values: ProductInput) => void;

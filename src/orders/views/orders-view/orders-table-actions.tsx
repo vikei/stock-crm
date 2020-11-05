@@ -10,7 +10,7 @@ import {
 import useMessages from "../../../library/lib/use-messages";
 import OrderDrawer from "../../components/order-drawer";
 import UpdateOrderDrawer from "../../components/update-order-drawer";
-import {useRefetchOrders} from "./orders-view.lib";
+import {useRefetchOrders} from "./lib";
 
 interface OrdersTableActionsProps {
   id: OrderQueryVariables["id"];
