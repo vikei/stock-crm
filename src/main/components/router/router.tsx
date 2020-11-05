@@ -1,9 +1,10 @@
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import RequireAuth from "../../../auth/lib/require-auth";
-import RequireNotAuth from "../../../auth/lib/require-not-auth";
+import RequireAuth from "../../../auth/components/require-auth";
+import RequireNotAuth from "../../../auth/components/require-not-auth";
 import LoginView from "../../../auth/views/login-view";
 import RegistrationView from "../../../auth/views/register-view";
+import {MessagesProvider} from "../../../library/lib/use-messages";
 import CreateOrderView from "../../../orders/views/create-order-view";
 import OrderView from "../../../orders/views/order-view";
 import OrdersView from "../../../orders/views/orders-view";
@@ -12,7 +13,6 @@ import CreateProductView from "../../../stock/views/create-product-view";
 import ProductView from "../../../stock/views/product-view";
 import StockView from "../../../stock/views/stock-view";
 import UpdateProductView from "../../../stock/views/update-product-view";
-import {MessagesProvider} from "../../../library/lib/use-messages";
 import AppLayout from "../app-layout/app-layout";
 
 export default function Router() {

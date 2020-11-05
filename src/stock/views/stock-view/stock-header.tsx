@@ -1,8 +1,8 @@
 import {PlusSquareOutlined} from "@ant-design/icons";
 import {Button} from "antd";
 import React, {useCallback} from "react";
-import {AppContentHeader} from "../../../main/components/app-layout";
 import useDrawer, {openDrawer} from "../../../library/lib/use-drawer";
+import {AppContentHeader} from "../../../main/components/app-layout";
 import CreateProductDrawer from "../../components/create-product-drawer";
 import {useRefetchProducts} from "./stock-view.lib";
 

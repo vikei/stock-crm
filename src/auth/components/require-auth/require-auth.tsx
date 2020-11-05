@@ -1,18 +1,18 @@
 import React, {ReactNode, useEffect} from "react";
 import {useHistory} from "react-router-dom";
-import {useAuth} from "./auth-context";
+import {useAuth} from "../../lib/use-auth";
 
-export default function RequireNotAuth({children}: {children: ReactNode}) {
+export default function RequireAuth({children}: {children: ReactNode}) {
   const [{user}] = useAuth();
   const history = useHistory();
 
   useEffect(() => {
-    if (user) {
-      history.push("/");
+    if (!user) {
+      history.push("/login");
     }
   }, [history, user]);
 
-  if (user) {
+  if (!user) {
     return null;
   }
 
