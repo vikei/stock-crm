@@ -111,13 +111,13 @@ export type QueryGetUserArgs = {
 export type Mutation = {
   __typename?: "Mutation";
   createOrder: Order;
-  updateOrder?: Maybe<Order>;
+  updateOrder: Order;
   deleteOrder?: Maybe<Scalars["Int"]>;
   createProduct: Product;
   updateProduct?: Maybe<Product>;
   deleteProduct?: Maybe<Scalars["Int"]>;
   register: User;
-  login?: Maybe<User>;
+  login: User;
 };
 
 export type MutationCreateOrderArgs = {
@@ -159,7 +159,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 export type LoginMutation = {__typename?: "Mutation"} & {
-  login?: Maybe<{__typename?: "User"} & Pick<User, "id" | "email">>;
+  login: {__typename?: "User"} & Pick<User, "id" | "email">;
 };
 
 export type RegisterMutationVariables = Exact<{
@@ -211,7 +211,7 @@ export type UpdateOrderMutationVariables = Exact<{
 }>;
 
 export type UpdateOrderMutation = {__typename?: "Mutation"} & {
-  updateOrder?: Maybe<{__typename?: "Order"} & OrderFieldsFragment>;
+  updateOrder: {__typename?: "Order"} & OrderFieldsFragment;
 };
 
 export type CreateProductMutationVariables = Exact<{

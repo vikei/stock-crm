@@ -6,6 +6,7 @@ import {useProductQuery} from "../../../main/lib/generated";
 
 export default function ProductView() {
   const {id} = useParams<{id: string}>();
+
   const {data} = useProductQuery({variables: {id}});
   if (!data?.product) {
     return null;
