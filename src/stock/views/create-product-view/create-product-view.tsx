@@ -1,20 +1,19 @@
-import React, {useCallback} from "react";
+import React from "react";
 import {useHistory} from "react-router-dom";
 import {AppContent} from "../../../main/components/app-layout";
-import {ProductQueryVariables} from "../../../main/lib/generated";
-import CreateProductContainer from "../../components/create-product-container";
+import ProductForm from "../../components/product-form";
+import useCreateProduct from "../../lib/use-create-product";
 
 export default function CreateProductView() {
   const history = useHistory();
-  const handleSuccess = useCallback(
-    (id: ProductQueryVariables["id"]) => {
-      history.push(`/stock/product/${id}`);
-    },
-    [history],
-  );
+
+  const {create} = useCreateProduct({
+    onSuccess: ({id}) => history.push(`/stock/product/${id}`),
+  });
+
   return (
     <AppContent title="Создать Продукт">
-      <CreateProductContainer onSuccess={handleSuccess} />
+      <ProductForm onSubmit={create} />
     </AppContent>
   );
 }

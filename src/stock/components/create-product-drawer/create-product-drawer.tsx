@@ -1,9 +1,9 @@
-import React, {useCallback} from "react";
-import useFakeLocation from "../../../library/lib/use-fake-location";
+import React from "react";
 import useDrawer, {closeDrawer} from "../../../library/lib/use-drawer";
-import {ProductQueryVariables} from "../../../main/lib/generated";
+import useFakeLocation from "../../../library/lib/use-fake-location";
+import useCreateProduct from "../../lib/use-create-product";
 import useProductMessage from "../../lib/use-product-message";
-import CreateProductContainer from "../create-product-container";
+import ProductForm from "../product-form";
 
 interface CreateProductDrawerProps {
   onSuccess?: () => void;
@@ -12,16 +12,16 @@ interface CreateProductDrawerProps {
 export default function CreateProductDrawer({onSuccess}: CreateProductDrawerProps) {
   useFakeLocation("/stock/product/create");
 
-  const {dispatch: drawerDispatch} = useDrawer();
+  const {dispatch} = useDrawer();
   const message = useProductMessage();
-  const handleSuccess = useCallback(
-    async (id: ProductQueryVariables["id"]) => {
-      closeDrawer(drawerDispatch);
+
+  const {create} = useCreateProduct({
+    onSuccess: ({id}) => {
+      closeDrawer(dispatch);
       message(id);
       onSuccess?.();
     },
-    [drawerDispatch, message, onSuccess],
-  );
+  });
 
-  return <CreateProductContainer onSuccess={handleSuccess} />;
+  return <ProductForm onSubmit={create} />;
 }
