@@ -4,6 +4,7 @@ import {Product, ProductInput, useUpdateProductMutation} from "../../main/lib/ge
 type UseUpdateProductProps = {
   onSuccess?: (data: Product) => void;
 };
+
 export default function useUpdateProduct({onSuccess}: UseUpdateProductProps = {}) {
   const [updateMutation] = useUpdateProductMutation();
 

@@ -4,6 +4,7 @@ import {Product, ProductInput, useCreateProductMutation} from "../../main/lib/ge
 type UseCreateProductParams = {
   onSuccess?: (data: Product) => void;
 };
+
 export default function useCreateProduct({onSuccess}: UseCreateProductParams = {}) {
   const [createMutation] = useCreateProductMutation();
 
