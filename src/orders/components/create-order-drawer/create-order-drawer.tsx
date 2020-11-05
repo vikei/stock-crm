@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import useFakeLocation from "../../../library/lib/use-fake-location";
-import {closeDrawer, useDrawer} from "../../../main/lib/drawer-context";
+import useDrawer, {closeDrawer} from "../../../library/lib/use-drawer";
 import {OrderQueryVariables} from "../../../main/lib/generated";
 import useOrderMessage from "../../lib/use-show-order-message";
 import CreateOrderContainer from "../create-order-container";

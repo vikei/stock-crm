@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import useFakeLocation from "../../../library/lib/use-fake-location";
-import {closeDrawer, useDrawer} from "../../../main/lib/drawer-context";
+import useDrawer, {closeDrawer} from "../../../library/lib/use-drawer";
 import {ProductQueryVariables} from "../../../main/lib/generated";
 import useProductMessage from "../../lib/use-show-product-message";
 import CreateProductContainer from "../create-product-container";

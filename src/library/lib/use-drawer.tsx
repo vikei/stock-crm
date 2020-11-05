@@ -42,15 +42,15 @@ function useDrawerReducer() {
   return useReducer(drawerReducer, {open: false, body: null});
 }
 
-const DrawerContext = createContext<ReturnType<typeof useDrawerReducer> | undefined>(undefined);
+const UseDrawer = createContext<ReturnType<typeof useDrawerReducer> | undefined>(undefined);
 
 export function DrawerProvider({children}: {children: ReactNode}) {
   const [state, dispatch] = useDrawerReducer();
-  return <DrawerContext.Provider value={[state, dispatch]}>{children}</DrawerContext.Provider>;
+  return <UseDrawer.Provider value={[state, dispatch]}>{children}</UseDrawer.Provider>;
 }
 
-export function useDrawer() {
-  const ctx = useContext(DrawerContext);
+export default function useDrawer() {
+  const ctx = useContext(UseDrawer);
   if (!ctx) {
     throw new Error("Expect to wrap in DrawerProvider");
   }

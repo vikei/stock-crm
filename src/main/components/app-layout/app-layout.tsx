@@ -1,6 +1,6 @@
 import {useHover} from "ahooks";
 import React, {ReactNode, useRef} from "react";
-import AppDrawer from "../app-drawer";
+import Drawer from "../../../library/components/drawer";
 import AppSidebar from "../app-sidebar";
 import {AppFooter, AppLayoutWrapper, AppSider} from "./app-layout.styled";
 
@@ -19,7 +19,7 @@ export default function AppLayout({children}: {children: ReactNode}) {
         {children}
         <AppFooter>Ant Design</AppFooter>
       </AppLayoutWrapper>
-      <AppDrawer />
+      <Drawer />
     </AppLayoutWrapper>
   );
 }

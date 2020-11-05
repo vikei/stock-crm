@@ -1,7 +1,7 @@
 import {DeleteOutlined, EditOutlined, EyeOutlined} from "@ant-design/icons";
 import {Button, Space} from "antd";
 import React, {useCallback} from "react";
-import {openDrawer, useDrawer} from "../../../main/lib/drawer-context";
+import useDrawer, {openDrawer} from "../../../library/lib/use-drawer";
 import {
   Product,
   ProductQueryVariables,
