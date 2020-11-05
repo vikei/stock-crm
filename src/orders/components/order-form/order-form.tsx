@@ -3,6 +3,7 @@ import {Button, Form, InputNumber, Select, Space} from "antd";
 import React from "react";
 import {Order, OrderInput, OrderStatus} from "../../../main/lib/generated";
 import ProductSelect from "../product-select";
+import {getDefaultOrderValues} from "./order-form.lib";
 
 interface OrderFormProps {
   onSubmit: (values: OrderInput) => Promise<void>;
@@ -11,20 +12,7 @@ interface OrderFormProps {
 
 export default function OrderForm({onSubmit, defaultValues}: OrderFormProps) {
   return (
-    <Form
-      onFinish={onSubmit}
-      initialValues={
-        defaultValues
-          ? {
-              ...defaultValues,
-              inventory: defaultValues.inventory.map(inventoryItem => ({
-                productId: inventoryItem.productId,
-                count: inventoryItem.count,
-              })),
-            }
-          : {status: OrderStatus.Processing}
-      }
-    >
+    <Form onFinish={onSubmit} initialValues={getDefaultOrderValues(defaultValues)}>
       <Form.Item label="Статус" name="status">
         <Select>
           {Object.values(OrderStatus).map(status => (
@@ -67,7 +55,7 @@ export default function OrderForm({onSubmit, defaultValues}: OrderFormProps) {
         )}
       </Form.List>
       <Form.Item>
-        <Button htmlType="submit">Submit</Button>
+        <Button htmlType="submit">Сохранить</Button>
       </Form.Item>
     </Form>
   );

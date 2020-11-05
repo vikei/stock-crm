@@ -1,7 +1,7 @@
 import {Button, Checkbox, Form, Input, InputNumber} from "antd";
 import React, {useCallback} from "react";
 import {Product, ProductInput} from "../../../main/lib/generated";
-import {productFormInitialValues} from "./product-form.lib";
+import {getDefaultProductValues} from "./product-form.lib";
 
 interface ProductFormProps {
   onSubmit: (values: ProductInput) => void;
@@ -17,7 +17,7 @@ export default function ProductForm({onSubmit, defaultValues}: ProductFormProps)
   );
 
   return (
-    <Form onFinish={submit} initialValues={defaultValues ?? productFormInitialValues}>
+    <Form onFinish={submit} initialValues={getDefaultProductValues(defaultValues)}>
       <Form.Item label="Название" name="name">
         <Input />
       </Form.Item>
@@ -33,7 +33,7 @@ export default function ProductForm({onSubmit, defaultValues}: ProductFormProps)
       <Form.Item label="Количество продукта на складе" name="stockCount">
         <InputNumber />
       </Form.Item>
-      <Button htmlType="submit">{defaultValues ? "Сохранить" : "Добавить"}</Button>
+      <Button htmlType="submit">Сохранить</Button>
     </Form>
   );
 }
