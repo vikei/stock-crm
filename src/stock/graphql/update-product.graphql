@@ -1,4 +1,4 @@
-mutation UpdateProducts($id: ID!, $input: ProductInput!) {
+mutation UpdateProduct($id: ID!, $input: ProductInput!) {
     updateProduct(id: $id, input: $input) {
         ...ProductFields
     }

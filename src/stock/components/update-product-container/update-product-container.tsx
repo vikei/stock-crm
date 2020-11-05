@@ -2,7 +2,7 @@ import React, {useCallback} from "react";
 import {
   ProductQueryVariables,
   useProductQuery,
-  useUpdateProductsMutation,
+  useUpdateProductMutation,
 } from "../../../main/lib/generated";
 import ProductForm from "../product-form/product-form";
 
@@ -12,7 +12,7 @@ interface UpdateProductContainerProps {
 }
 
 export default function UpdateProductContainer({id, onSuccess}: UpdateProductContainerProps) {
-  const [updateMutation] = useUpdateProductsMutation();
+  const [updateMutation] = useUpdateProductMutation();
   const onSubmit = useCallback(
     async values => {
       try {

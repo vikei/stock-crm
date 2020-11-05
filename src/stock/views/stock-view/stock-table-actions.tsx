@@ -5,7 +5,7 @@ import {openDrawer, useDrawerContext} from "../../../main/lib/drawer-context";
 import {
   Product,
   ProductQueryVariables,
-  UpdateProductsMutationVariables,
+  UpdateProductMutationVariables,
   useDeleteProductMutation,
 } from "../../../main/lib/generated";
 import {useMessages} from "../../../main/lib/use-messages";
@@ -33,7 +33,7 @@ export default function StockTableActions({id, name}: StockTableActionsProps) {
   );
 
   const openForm = useCallback(
-    ({id, name}: {id: UpdateProductsMutationVariables["id"]; name: string}) => {
+    ({id, name}: {id: UpdateProductMutationVariables["id"]; name: string}) => {
       openDrawer(dispatch, {
         title: `Обновить #${name}`,
         width: "80vw",

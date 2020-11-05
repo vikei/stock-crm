@@ -11,14 +11,10 @@ export default function CreateOrderContainer({onSuccess}: CreateOrderContainerPr
 
   const handleSubmit = useCallback(
     async values => {
-      try {
-        const {data} = await createMutation({variables: {input: values}});
-        const id = data?.createOrder?.id;
-        if (id) {
-          onSuccess?.(id);
-        }
-      } catch (e) {
-        console.error(e);
+      const {data} = await createMutation({variables: {input: values}});
+      const id = data?.createOrder?.id;
+      if (id) {
+        onSuccess?.(id);
       }
     },
     [createMutation, onSuccess],

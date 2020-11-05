@@ -1,5 +1,5 @@
 import React, {useCallback} from "react";
-import {ProductQueryVariables, useCreateProductsMutation} from "../../../main/lib/generated";
+import {ProductQueryVariables, useCreateProductMutation} from "../../../main/lib/generated";
 import ProductForm from "../product-form/product-form";
 
 interface CreateProductContainerProps {
@@ -7,7 +7,7 @@ interface CreateProductContainerProps {
 }
 
 export default function CreateProductContainer({onSuccess}: CreateProductContainerProps) {
-  const [createMutation] = useCreateProductsMutation();
+  const [createMutation] = useCreateProductMutation();
   const onSubmit = useCallback(
     async values => {
       try {
