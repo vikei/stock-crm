@@ -11,12 +11,10 @@ export type Scalars = {
   Float: number;
 };
 
-export type Stock = {
-  __typename?: "Stock";
-  id: Scalars["ID"];
+export type CartItem = {
+  __typename?: "CartItem";
   productId: Scalars["Int"];
   count: Scalars["Int"];
-  product: Product;
 };
 
 export type Product = {
@@ -29,21 +27,15 @@ export type Product = {
   stockCount: Scalars["Int"];
 };
 
-export type OrderInventoryItem = {
-  __typename?: "OrderInventoryItem";
-  productId: Scalars["Int"];
-  count: Scalars["Int"];
-};
-
 export type Order = {
   __typename?: "Order";
   id: Scalars["ID"];
-  status: OrderStatus;
-  inventory: Array<OrderInventoryItem>;
+  deliveryStatus: DeliveryStatus;
+  cart: Array<CartItem>;
   products: Array<Product>;
 };
 
-export enum OrderStatus {
+export enum DeliveryStatus {
   AwaitingProcessing = "AWAITING_PROCESSING",
   Processing = "PROCESSING",
   Shipped = "SHIPPED",
@@ -58,14 +50,14 @@ export type User = {
   email: Scalars["String"];
 };
 
-export type OrderInventoryInput = {
+export type CartItemInput = {
   productId: Scalars["Int"];
   count: Scalars["Int"];
 };
 
 export type OrderInput = {
-  inventory: Array<OrderInventoryInput>;
-  status: OrderStatus;
+  cart: Array<CartItemInput>;
+  deliveryStatus: DeliveryStatus;
 };
 
 export type ProductInput = {
@@ -76,14 +68,13 @@ export type ProductInput = {
   available: Scalars["Boolean"];
 };
 
-export type UserCredentials = {
+export type UserCredentialsInput = {
   email: Scalars["String"];
   password: Scalars["String"];
 };
 
 export type Query = {
   __typename?: "Query";
-  hello: Scalars["String"];
   orders: Array<Order>;
   order?: Maybe<Order>;
   products: Array<Product>;
@@ -147,15 +138,15 @@ export type MutationDeleteProductArgs = {
 };
 
 export type MutationRegisterArgs = {
-  input: UserCredentials;
+  input: UserCredentialsInput;
 };
 
 export type MutationLoginArgs = {
-  input: UserCredentials;
+  input: UserCredentialsInput;
 };
 
 export type LoginMutationVariables = Exact<{
-  input: UserCredentials;
+  input: UserCredentialsInput;
 }>;
 
 export type LoginMutation = {__typename?: "Mutation"} & {
@@ -163,7 +154,7 @@ export type LoginMutation = {__typename?: "Mutation"} & {
 };
 
 export type RegisterMutationVariables = Exact<{
-  input: UserCredentials;
+  input: UserCredentialsInput;
 }>;
 
 export type RegisterMutation = {__typename?: "Mutation"} & {
@@ -184,10 +175,8 @@ export type DeleteOrderMutationVariables = Exact<{
 
 export type DeleteOrderMutation = {__typename?: "Mutation"} & Pick<Mutation, "deleteOrder">;
 
-export type OrderFieldsFragment = {__typename?: "Order"} & Pick<Order, "id" | "status"> & {
-    inventory: Array<
-      {__typename?: "OrderInventoryItem"} & Pick<OrderInventoryItem, "productId" | "count">
-    >;
+export type OrderFieldsFragment = {__typename?: "Order"} & Pick<Order, "id" | "deliveryStatus"> & {
+    cart: Array<{__typename?: "CartItem"} & Pick<CartItem, "productId" | "count">>;
     products: Array<{__typename?: "Product"} & ProductFieldsFragment>;
   };
 
@@ -272,8 +261,8 @@ export const ProductFieldsFragmentDoc = gql`
 export const OrderFieldsFragmentDoc = gql`
   fragment OrderFields on Order {
     id
-    status
-    inventory {
+    deliveryStatus
+    cart {
       productId
       count
     }
@@ -284,7 +273,7 @@ export const OrderFieldsFragmentDoc = gql`
   ${ProductFieldsFragmentDoc}
 `;
 export const LoginDocument = gql`
-  mutation Login($input: UserCredentials!) {
+  mutation Login($input: UserCredentialsInput!) {
     login(input: $input) {
       id
       email
@@ -322,7 +311,7 @@ export type LoginMutationOptions = Apollo.BaseMutationOptions<
   LoginMutationVariables
 >;
 export const RegisterDocument = gql`
-  mutation Register($input: UserCredentials!) {
+  mutation Register($input: UserCredentialsInput!) {
     register(input: $input) {
       id
       email

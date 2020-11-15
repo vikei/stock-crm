@@ -1,6 +1,6 @@
 import {Button, Card, Form, Input} from "antd";
 import React, {useCallback} from "react";
-import {UserCredentials, useRegisterMutation} from "../../../main/lib/generated";
+import {UserCredentialsInput, useRegisterMutation} from "../../../main/lib/generated";
 import useAuth, {setUser} from "../../lib/use-auth";
 import {RegistrationContainer} from "./styled";
 
@@ -8,8 +8,9 @@ export default function RegistrationView() {
   const [register] = useRegisterMutation();
   const [, dispatch] = useAuth();
 
+  // TODO: move to separate function
   const submit = useCallback(
-    async (values: UserCredentials) => {
+    async (values: UserCredentialsInput) => {
       try {
         const {data} = await register({variables: {input: values}});
         setUser(dispatch, data?.register!);
