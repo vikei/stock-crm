@@ -14,7 +14,10 @@ export default function CreateProductDrawer({onSuccess}: CreateProductDrawerProp
 
   const {dispatch} = useDrawer();
   const message = useProductMessage();
-
+  /**
+   * TODO: move to separate file
+   * To have only one reason to change Component
+   */
   const {create} = useCreateProduct({
     onSuccess: ({id}) => {
       closeDrawer(dispatch);

@@ -4,6 +4,7 @@ import SaveProductMessage from "../components/save-product-message";
 
 export default function useProductMessage() {
   const message = useMessages();
+
   return useCallback(
     (id: string) => {
       message.success({

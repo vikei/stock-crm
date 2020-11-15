@@ -17,6 +17,10 @@ export default function UpdateProductDrawer({id}: UpdateProductDrawerProps) {
   const message = useProductMessage();
 
   const {update} = useUpdateProduct();
+  /**
+   * TODO: move to separate file
+   * To have only one reason to change Component
+   */
   const handleSubmit = useCallback(
     async (values: ProductInput) => {
       await update(id, values);

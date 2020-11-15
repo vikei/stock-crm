@@ -21,6 +21,10 @@ interface StockTableActionsProps {
 export default function StockTableActions({id, name}: StockTableActionsProps) {
   const {dispatch} = useDrawer();
 
+  /**
+   * TODO: move to separate file
+   * To have only one reason to change UpdateProductDrawer
+   */
   const openPreview = useCallback(
     ({id, name}: {id: ProductQueryVariables["id"]; name: string}) => {
       openDrawer(dispatch, {
@@ -32,6 +36,10 @@ export default function StockTableActions({id, name}: StockTableActionsProps) {
     [dispatch],
   );
 
+  /**
+   * TODO: move to separate file
+   * To have only one reason to change UpdateProductDrawer
+   */
   const openForm = useCallback(
     ({id, name}: {id: UpdateProductMutationVariables["id"]; name: string}) => {
       openDrawer(dispatch, {
@@ -43,6 +51,10 @@ export default function StockTableActions({id, name}: StockTableActionsProps) {
     [dispatch],
   );
 
+  /**
+   * TODO: move to separate file
+   * To have only one reason to change UpdateProductDrawer
+   */
   const {refetch} = useRefetchProducts();
   const [deleteMutation] = useDeleteProductMutation();
   const message = useMessages();

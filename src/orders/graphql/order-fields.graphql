@@ -1,7 +1,7 @@
 fragment OrderFields on Order {
     id
-    status
-    inventory {
+    deliveryStatus
+    cart {
         productId
         count
     }

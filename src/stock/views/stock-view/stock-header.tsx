@@ -7,6 +7,10 @@ import CreateProductDrawer from "../../components/create-product-drawer";
 import {useRefetchProducts} from "./lib";
 
 export default function StockHeader() {
+  /**
+   * TODO: move to separate file
+   * To have only one reason to change UpdateProductDrawer
+   */
   const {dispatch: drawerDispatch} = useDrawer();
   const {refetch} = useRefetchProducts();
   const openForm = useCallback(() => {

@@ -4,6 +4,10 @@ import React from "react";
 import {Product, ProductsQuery} from "../../../main/lib/generated";
 import StockTableActions from "./stock-table-actions";
 
+/**
+ * TODO: move to separate file
+ * To have only one reason to change UpdateProductDrawer
+ */
 const columns: ColumnsType<Product> = [
   {
     title: "ID",
