@@ -1,6 +1,6 @@
 import React from "react";
 import useFakeLocation from "../../../../library/lib/use-fake-location";
-import useCreateProduct from "./use-create-product";
+import useHandleCreateProduct from "./use-handle-create-product";
 import ProductForm from "../product-form";
 
 interface CreateProductDrawerProps {
@@ -10,7 +10,7 @@ interface CreateProductDrawerProps {
 export default function CreateProductDrawer({onSuccess}: CreateProductDrawerProps) {
   useFakeLocation("/stock/product/create");
 
-  const {create} = useCreateProduct({onSuccess});
+  const {handleCreateProduct} = useHandleCreateProduct({onSuccess});
 
-  return <ProductForm onSubmit={create} />;
+  return <ProductForm onSubmit={handleCreateProduct} />;
 }

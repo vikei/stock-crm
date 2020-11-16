@@ -1,9 +1,7 @@
-import React, {useCallback} from "react";
+import React from "react";
 import useFakeLocation from "../../../../library/lib/use-fake-location";
-import useDrawer, {closeDrawer} from "../../../../library/lib/use-drawer";
-import {OrderQueryVariables} from "../../../../main/lib/generated";
-import useOrderMessage from "../../lib/use-order-message";
-import CreateOrderContainer from "../create-order-container";
+import OrderForm from "../order-form";
+import useHandleCreateOrder from "./use-handle-create-order";
 
 interface CreateOrderDrawerProps {
   onSuccess?: () => void;
@@ -12,16 +10,7 @@ interface CreateOrderDrawerProps {
 export default function CreateOrderDrawer({onSuccess}: CreateOrderDrawerProps) {
   useFakeLocation("/orders/create");
 
-  const {dispatch: drawerDispatch} = useDrawer();
-  const message = useOrderMessage();
-  const handleSuccess = useCallback(
-    async (id: OrderQueryVariables["id"]) => {
-      closeDrawer(drawerDispatch);
-      message(id);
-      onSuccess?.();
-    },
-    [drawerDispatch, message, onSuccess],
-  );
+  const {handleCreateOrder} = useHandleCreateOrder({onSuccess});
 
-  return <CreateOrderContainer onSuccess={handleSuccess} />;
+  return <OrderForm onSubmit={handleCreateOrder} />;
 }

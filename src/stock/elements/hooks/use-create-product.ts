@@ -4,7 +4,7 @@ import ProductDto from "../../domain/dto/product.dto";
 import ProductEntity from "../../domain/entities/product.entity";
 
 type UseCreateProductParams = {
-  onSuccess?: (data: ProductEntity) => void;
+  onSuccess?: (product: ProductEntity) => void;
 };
 
 export default function useCreateProduct({onSuccess}: UseCreateProductParams = {}) {

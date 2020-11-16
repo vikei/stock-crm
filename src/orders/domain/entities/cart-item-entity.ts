@@ -1,4 +1,4 @@
-export default class CartItem {
+export default class CartItemEntity {
   productId: number;
   count: number;
 }

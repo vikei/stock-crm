@@ -1,21 +1,14 @@
-import React, {useCallback} from "react";
-import {useHistory} from "react-router-dom";
+import React from "react";
 import {AppContent} from "../../../../main/components/app-layout";
-import {OrderQueryVariables} from "../../../../main/lib/generated";
-import CreateOrderContainer from "../../components/create-order-container";
+import useHandleCreateOrder from "../../components/create-order-drawer/use-handle-create-order";
+import OrderForm from "../../components/order-form";
 
 export default function CreateOrderView() {
-  const history = useHistory();
-  const handleSuccess = useCallback(
-    (id: OrderQueryVariables["id"]) => {
-      history.push(`/orders/${id}`);
-    },
-    [history],
-  );
+  const {handleCreateOrder} = useHandleCreateOrder();
 
   return (
     <AppContent title="Создать Заказ">
-      <CreateOrderContainer onSuccess={handleSuccess} />
+      <OrderForm onSubmit={handleCreateOrder} />
     </AppContent>
   );
 }

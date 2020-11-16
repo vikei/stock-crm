@@ -2,7 +2,7 @@ import React, {useCallback} from "react";
 import useFakeLocation from "../../../../library/lib/use-fake-location";
 import useDrawer, {closeDrawer} from "../../../../library/lib/use-drawer";
 import {OrderQueryVariables} from "../../../../main/lib/generated";
-import useOrderMessage from "../../lib/use-order-message";
+import useOrderMessage from "../../hooks/use-order-message";
 import UpdateOrderContainer from "../update-order-container";
 
 interface UpdateOrderDrawerProps {

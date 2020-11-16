@@ -1,13 +1,15 @@
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {Button, Form, InputNumber, Select, Space} from "antd";
 import React from "react";
-import {Order, OrderInput, DeliveryStatus} from "../../../../main/lib/generated";
+import {DeliveryStatus} from "../../../../main/lib/generated";
+import ProductEntity from "../../../../stock/domain/entities/product.entity";
 import ProductSelect from "../product-select";
 import {deserializeOrderForm, getDefaultOrderValues} from "./lib";
+import OrderValues from "./order-values";
 
 interface OrderFormProps {
-  onSubmit: (values: OrderInput) => Promise<void>; // TODO: make own type: OrderValues
-  defaultValues?: Order; // TODO: make own type: OrderValues
+  onSubmit: (values: OrderValues) => Promise<any>;
+  defaultValues?: OrderValues;
 }
 
 export default function OrderForm({onSubmit, defaultValues}: OrderFormProps) {

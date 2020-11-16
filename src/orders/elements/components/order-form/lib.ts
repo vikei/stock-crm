@@ -1,6 +1,8 @@
-import {Order, DeliveryStatus, OrderInput} from "../../../../main/lib/generated";
+import {DeliveryStatus, OrderInput} from "../../../../main/lib/generated";
+import OrderValues from "./order-values";
 
-export function getDefaultOrderValues(data: Order | undefined) {
+// TODO: move to folder and split
+export function getDefaultOrderValues(data: OrderValues | undefined) {
   return data
     ? {
         ...data,
