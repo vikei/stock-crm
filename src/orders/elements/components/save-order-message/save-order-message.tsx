@@ -1,8 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import OrderEntity from "../../../domain/entities/orderEntity";
 
 interface SaveOrderMessageProps {
-  id: string;
+  id: OrderEntity["id"];
 }
 
 export default function SaveOrderMessage({id}: SaveOrderMessageProps) {
