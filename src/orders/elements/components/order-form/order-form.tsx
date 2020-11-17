@@ -7,7 +7,7 @@ import {deserializeOrderForm, getDefaultOrderValues} from "./lib";
 import OrderValues from "./order-values";
 
 interface OrderFormProps {
-  onSubmit: (values: OrderValues) => Promise<any>;
+  onSubmit: (values: OrderValues) => void;
   defaultValues?: OrderValues;
 }
 
