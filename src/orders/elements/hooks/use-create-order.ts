@@ -14,9 +14,7 @@ export default function useCreateOrder({onSuccess}: UserCreateOrder = {}) {
     async (input: OrderDto) => {
       const {data} = await createMutation({variables: {input}});
       const order = data!.createOrder!;
-
       onSuccess?.(order);
-
       return order;
     },
     [createMutation, onSuccess],

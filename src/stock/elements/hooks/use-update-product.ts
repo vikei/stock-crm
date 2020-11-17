@@ -14,9 +14,7 @@ export default function useUpdateProduct({onSuccess}: UseUpdateProductProps = {}
     async (id: ProductEntity["id"], input: ProductDto) => {
       const {data} = await updateMutation({variables: {input, id}});
       const product = data!.updateProduct!;
-
       onSuccess?.(product);
-
       return product;
     },
     [onSuccess, updateMutation],

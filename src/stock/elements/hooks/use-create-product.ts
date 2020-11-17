@@ -14,9 +14,7 @@ export default function useCreateProduct({onSuccess}: UseCreateProductParams = {
     async (input: ProductDto) => {
       const {data} = await createMutation({variables: {input}});
       const product = data!.createProduct!;
-
       onSuccess?.(product);
-
       return product;
     },
     [createMutation, onSuccess],

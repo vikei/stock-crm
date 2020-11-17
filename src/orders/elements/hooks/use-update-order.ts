@@ -15,6 +15,7 @@ export default function useUpdateOrder({onSuccess}: UseUpdateOrder = {}) {
         const {data} = await updateMutation({variables: {input: values, id}});
         const order = data!.updateOrder!;
         onSuccess?.(order);
+        return order;
       } catch (e) {
         console.error(e);
       }

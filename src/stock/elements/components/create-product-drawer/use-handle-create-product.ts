@@ -1,6 +1,6 @@
 import useDrawer, {closeDrawer} from "../../../../library/lib/use-drawer";
 import ProductEntity from "../../../domain/entities/product.entity";
-import useCreateProductMain from "../../hooks/use-create-product";
+import useCreateProduct from "../../hooks/use-create-product";
 import useProductMessage from "../../hooks/use-product-message";
 
 type UserHandleCreateProduct = {
@@ -11,7 +11,7 @@ export default function useHandleCreateProduct({onSuccess}: UserHandleCreateProd
   const {dispatch} = useDrawer();
   const message = useProductMessage();
 
-  const {create} = useCreateProductMain({
+  const {create} = useCreateProduct({
     onSuccess: product => {
       closeDrawer(dispatch);
       message(product.id);
