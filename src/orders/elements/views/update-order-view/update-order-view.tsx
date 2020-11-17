@@ -1,23 +1,30 @@
 import React, {useCallback} from "react";
-import {useHistory, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {AppContent} from "../../../../main/components/app-layout";
-import {OrderQueryVariables} from "../../../../main/lib/generated";
-import UpdateOrderContainer from "../../components/update-order-container";
+import {useOrderQuery} from "../../../../main/lib/generated";
+import OrderForm from "../../components/order-form";
+import OrderValues from "../../components/order-form/order-values";
+import useHandleUpdateOrder from "./use-handle-update-order";
 
 export default function UpdateOrderView() {
   const {id} = useParams<{id: string}>();
 
-  const history = useHistory();
-  const handleSuccess = useCallback(
-    (id: OrderQueryVariables["id"]) => {
-      history.push(`/orders/${id}`);
+  const {handleUpdateOrder} = useHandleUpdateOrder();
+  const handleSubmit = useCallback(
+    async (values: OrderValues) => {
+      await handleUpdateOrder(id, values);
     },
-    [history],
+    [handleUpdateOrder, id],
   );
+
+  const {data} = useOrderQuery({variables: {id}});
+  if (!data?.order) {
+    return null;
+  }
 
   return (
     <AppContent title={`Изменить продукт #${id}`}>
-      <UpdateOrderContainer id={id} onSuccess={handleSuccess} />
+      <OrderForm defaultValues={data.order} onSubmit={handleSubmit} />
     </AppContent>
   );
 }

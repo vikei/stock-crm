@@ -2,7 +2,6 @@ import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {Button, Form, InputNumber, Select, Space} from "antd";
 import React from "react";
 import {DeliveryStatus} from "../../../../main/lib/generated";
-import ProductEntity from "../../../../stock/domain/entities/product.entity";
 import ProductSelect from "../product-select";
 import {deserializeOrderForm, getDefaultOrderValues} from "./lib";
 import OrderValues from "./order-values";

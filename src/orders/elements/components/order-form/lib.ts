@@ -6,6 +6,10 @@ export function getDefaultOrderValues(data: OrderValues | undefined) {
   return data
     ? {
         ...data,
+        /**
+         * TODO: remove __typename, check missing typing because OrderValues don't have __typename property
+         * but value that passed have
+         */
         inventory: data.cart.map(cartItem => ({
           productId: cartItem.productId,
           count: cartItem.count,

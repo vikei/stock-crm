@@ -1,23 +1,30 @@
 import React, {useCallback} from "react";
 import useFakeLocation from "../../../../library/lib/use-fake-location";
-import useDrawer, {closeDrawer} from "../../../../library/lib/use-drawer";
-import {OrderQueryVariables} from "../../../../main/lib/generated";
-import useOrderMessage from "../../hooks/use-order-message";
-import UpdateOrderContainer from "../update-order-container";
+import {useOrderQuery} from "../../../../main/lib/generated";
+import OrderEntity from "../../../domain/entities/orderEntity";
+import OrderForm from "../order-form";
+import OrderValues from "../order-form/order-values";
+import useHandleUpdateOrder from "./use-handle-update-order";
 
 interface UpdateOrderDrawerProps {
-  id: OrderQueryVariables["id"];
+  id: OrderEntity["id"];
 }
 
 export default function UpdateOrderDrawer({id}: UpdateOrderDrawerProps) {
   useFakeLocation(`/orders/${id}/update`);
 
-  const {dispatch: drawerDispatch} = useDrawer();
-  const message = useOrderMessage();
-  const handleSuccess = useCallback(async () => {
-    closeDrawer(drawerDispatch);
-    message(id);
-  }, [drawerDispatch, id, message]);
+  const {handleUpdateOrder} = useHandleUpdateOrder();
+  const handleSubmit = useCallback(
+    async (values: OrderValues) => {
+      await handleUpdateOrder(id, values);
+    },
+    [handleUpdateOrder, id],
+  );
 
-  return <UpdateOrderContainer id={id} onSuccess={handleSuccess} />;
+  const {data} = useOrderQuery({variables: {id}});
+  if (!data?.order) {
+    return null;
+  }
+
+  return <OrderForm defaultValues={data.order} onSubmit={handleSubmit} />;
 }
