@@ -1,9 +1,9 @@
 import React, {useCallback} from "react";
 import {useParams} from "react-router-dom";
 import {AppContent} from "../../../../main/components/app-layout";
-import {useProductQuery} from "../../../../main/lib/generated";
 import ProductDto from "../../../domain/dto/product.dto";
 import ProductForm from "../../components/product-form";
+import useProduct from "../../hooks/use-product";
 import useUpdateProduct from "./use-update-product";
 
 export default function UpdateProductView() {
@@ -17,11 +17,11 @@ export default function UpdateProductView() {
     [id, update],
   );
 
-  const {data} = useProductQuery({variables: {id}});
+  const {data} = useProduct({id});
 
   return (
-    <AppContent title={`Изменить продукт #${data?.product?.name ?? id}`}>
-      {data?.product && <ProductForm defaultValues={data?.product} onSubmit={handleSubmit} />}
+    <AppContent title={`Изменить продукт #${data?.name ?? id}`}>
+      {data && <ProductForm defaultValues={data} onSubmit={handleSubmit} />}
     </AppContent>
   );
 }

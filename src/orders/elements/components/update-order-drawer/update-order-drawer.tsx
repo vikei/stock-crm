@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 import useFakeLocation from "../../../../library/lib/use-fake-location";
-import {useOrderQuery} from "../../../../main/lib/generated";
 import OrderEntity from "../../../domain/entities/orderEntity";
+import useOrder from "../../hooks/use-order";
 import OrderForm from "../order-form";
 import OrderValues from "../order-form/order-values";
 import useHandleUpdateOrder from "./use-handle-update-order";
@@ -21,10 +21,10 @@ export default function UpdateOrderDrawer({id}: UpdateOrderDrawerProps) {
     [handleUpdateOrder, id],
   );
 
-  const {data} = useOrderQuery({variables: {id}});
-  if (!data?.order) {
+  const {data} = useOrder({id});
+  if (!data) {
     return null;
   }
 
-  return <OrderForm defaultValues={data.order} onSubmit={handleSubmit} />;
+  return <OrderForm defaultValues={data} onSubmit={handleSubmit} />;
 }

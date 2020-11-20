@@ -1,7 +1,8 @@
 import {Typography} from "antd";
 import React from "react";
 import useFakeLocation from "../../../../library/lib/use-fake-location";
-import {OrderQueryVariables, useOrderQuery} from "../../../../main/lib/generated";
+import {OrderQueryVariables} from "../../../../main/lib/generated";
+import useOrder from "../../hooks/use-order";
 
 interface OrderDrawerProps {
   id: OrderQueryVariables["id"];
@@ -10,10 +11,10 @@ interface OrderDrawerProps {
 export default function OrderDrawer({id}: OrderDrawerProps) {
   useFakeLocation(`/orders/${id}`);
 
-  const {data} = useOrderQuery({variables: {id}});
-  if (!data?.order) {
+  const {data} = useOrder({id});
+  if (!data) {
     return null;
   }
 
-  return <Typography>{data.order.id}</Typography>;
+  return <Typography>{data.id}</Typography>;
 }

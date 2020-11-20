@@ -1,8 +1,8 @@
 import {Typography} from "antd";
 import React from "react";
 import useFakeLocation from "../../../../library/lib/use-fake-location";
-import {useProductQuery} from "../../../../main/lib/generated";
 import ProductEntity from "../../../domain/entities/product.entity";
+import useProduct from "../../hooks/use-product";
 
 interface ProductDrawerProps {
   id: ProductEntity["id"];
@@ -11,10 +11,10 @@ interface ProductDrawerProps {
 export default function ProductDrawer({id}: ProductDrawerProps) {
   useFakeLocation(`/stock/product/${id}`);
 
-  const {data} = useProductQuery({variables: {id}});
-  if (!data?.product) {
+  const {data} = useProduct({id});
+  if (!data) {
     return null;
   }
 
-  return <Typography>{data.product.description}</Typography>;
+  return <Typography>{data.description}</Typography>;
 }
