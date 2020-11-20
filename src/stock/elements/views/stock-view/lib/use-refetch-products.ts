@@ -1,7 +1,7 @@
 import {ApolloQueryResult} from "@apollo/client";
 import {createContext} from "react";
-import useRequiredContext from "../../../../library/lib/use-required-context";
-import {ProductsQuery} from "../../../../main/lib/generated";
+import useRequiredContext from "../../../../../library/lib/use-required-context";
+import {ProductsQuery} from "../../../../../main/lib/generated";
 
 export type RefetchProducts = () => Promise<ApolloQueryResult<ProductsQuery>>;
 
@@ -11,6 +11,6 @@ export const RefetchProductsContext = createContext<{refetch: RefetchProducts} |
 
 RefetchProductsContext.displayName = "RefetchProductProvider";
 
-export function useRefetchProducts() {
+export default function useRefetchProducts() {
   return useRequiredContext(RefetchProductsContext);
 }

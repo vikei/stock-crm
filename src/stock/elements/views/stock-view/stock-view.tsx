@@ -1,9 +1,9 @@
 import React from "react";
 import {AppContent} from "../../../../main/components/app-layout";
 import {useProductsQuery} from "../../../../main/lib/generated";
+import {RefetchProductsContext} from "./lib/use-refetch-products";
 import StockHeader from "./stock-header";
 import StockTable from "./stock-table";
-import {RefetchProductsContext} from "./lib";
 
 export default function StockView() {
   const {data, refetch} = useProductsQuery();

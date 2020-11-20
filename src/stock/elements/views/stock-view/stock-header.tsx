@@ -1,30 +1,16 @@
 import {PlusSquareOutlined} from "@ant-design/icons";
 import {Button} from "antd";
-import React, {useCallback} from "react";
-import useDrawer, {openDrawer} from "../../../../library/lib/use-drawer";
+import React from "react";
 import {AppContentHeader} from "../../../../main/components/app-layout";
-import CreateProductDrawer from "../../components/create-product-drawer";
-import {useRefetchProducts} from "./lib";
+import useOpenCreateProductDrawer from "./lib/use-open-create-product-drawer";
 
 export default function StockHeader() {
-  /**
-   * TODO: move to separate file
-   * To have only one reason to change UpdateProductDrawer
-   */
-  const {dispatch: drawerDispatch} = useDrawer();
-  const {refetch} = useRefetchProducts();
-  const openForm = useCallback(() => {
-    openDrawer(drawerDispatch, {
-      title: "Добавить продукт",
-      body: <CreateProductDrawer onSuccess={refetch} />,
-      width: "80vw",
-    });
-  }, [drawerDispatch, refetch]);
+  const open = useOpenCreateProductDrawer();
 
   return (
     <AppContentHeader>
       <div>
-        <Button icon={<PlusSquareOutlined />} onClick={openForm}>
+        <Button icon={<PlusSquareOutlined />} onClick={open}>
           Добавить Продукт
         </Button>
       </div>
