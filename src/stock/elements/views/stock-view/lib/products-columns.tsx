@@ -3,7 +3,7 @@ import React from "react";
 import ProductEntity from "../../../../domain/entities/product.entity";
 import StockTableActions from "../stock-table-actions";
 
-const columns: ColumnsType<ProductEntity> = [
+const productColumns: ColumnsType<ProductEntity> = [
   {
     title: "ID",
     dataIndex: "id",
@@ -28,4 +28,4 @@ const columns: ColumnsType<ProductEntity> = [
   },
 ];
 
-export default columns;
+export default productColumns;

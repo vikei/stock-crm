@@ -1,67 +1,25 @@
 import {DeleteOutlined, EditOutlined, EyeOutlined} from "@ant-design/icons";
 import {Button, Space} from "antd";
-import React, {useCallback} from "react";
-import useDrawer, {openDrawer} from "../../../../library/lib/use-drawer";
-import {
-  OrderQueryVariables,
-  UpdateOrderMutationVariables,
-  useDeleteOrderMutation,
-} from "../../../../main/lib/generated";
-import useMessages from "../../../../library/lib/use-messages";
-import OrderDrawer from "../../components/order-drawer";
-import UpdateOrderDrawer from "../../components/update-order-drawer";
-import {useRefetchOrders} from "./lib";
+import React from "react";
+import OrderEntity from "../../../domain/entities/orderEntity";
+import useDeleteOrder from "./lib/use-delete-order";
+import useOpenOrderDrawer from "./lib/use-open-order-drawer";
+import useOpenUpdateOrderDrawer from "./lib/use-open-update-order-drawer";
 
 interface OrdersTableActionsProps {
-  id: OrderQueryVariables["id"];
+  id: OrderEntity["id"];
 }
 
 export default function OrdersTableActions({id}: OrdersTableActionsProps) {
-  const {dispatch} = useDrawer();
-
-  const openForm = useCallback(
-    (id: UpdateOrderMutationVariables["id"]) => {
-      openDrawer(dispatch, {
-        title: `Обновить закза #${id}`,
-        width: "80vw",
-        body: <UpdateOrderDrawer id={id} />,
-      });
-    },
-    [dispatch],
-  );
-
-  const openPreview = useCallback(
-    ({id}: {id: string}) => {
-      openDrawer(dispatch, {
-        title: `#${id}`,
-        width: "80vw",
-        body: <OrderDrawer id={id} />,
-      });
-    },
-    [dispatch],
-  );
-
-  const {refetch} = useRefetchOrders();
-  const message = useMessages();
-  const [deleteMutation] = useDeleteOrderMutation();
-  const remove = useCallback(
-    async (id: string) => {
-      try {
-        await deleteMutation({variables: {id}});
-        message.success("Заказ успешно удален!");
-        await refetch();
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    [deleteMutation, message, refetch],
-  );
+  const openUpdateOrderDrawer = useOpenUpdateOrderDrawer();
+  const openOrderDrawer = useOpenOrderDrawer();
+  const deleteOrder = useDeleteOrder();
 
   return (
     <Space size={5}>
-      <Button icon={<EditOutlined />} onClick={() => openForm(id)} />
-      <Button icon={<EyeOutlined />} onClick={() => openPreview({id})} />
-      <Button icon={<DeleteOutlined />} onClick={() => remove(id)} />
+      <Button icon={<EditOutlined />} onClick={() => openUpdateOrderDrawer(id)} />
+      <Button icon={<EyeOutlined />} onClick={() => openOrderDrawer({id})} />
+      <Button icon={<DeleteOutlined />} onClick={() => deleteOrder(id)} />
     </Space>
   );
 }

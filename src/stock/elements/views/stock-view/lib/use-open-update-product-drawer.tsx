@@ -9,7 +9,7 @@ export default function useOpenUpdateProductDrawer() {
   return useCallback(
     ({id, name}: {id: ProductEntity["id"]; name: ProductEntity["name"]}) => {
       openDrawer(dispatch, {
-        title: `Обновить #${name}`,
+        title: `Продукт: ${name}`,
         width: "80vw",
         body: <UpdateProductDrawer id={id} />,
       });
